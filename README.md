@@ -16,8 +16,6 @@
    - [Creating a Branch](#creating-a-branch)
    - [Making Pull Requests](#making-pull-requests)
    - [Reviewing and Merging Pull Requests](#reviewing-and-merging-pull-requests)
-5. [Best Practices](#best-practices)
-6. [Conclusion](#conclusion)
 
 ## Introduction
 This README file provides a step-by-step guide on how to use GitHub for version control and collaboration on your project. Whether you are new to GitHub or need a refresher, this guide will help you get started and work effectively with others.
