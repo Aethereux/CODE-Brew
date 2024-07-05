@@ -1,5 +1,5 @@
-#ifndef features_h
-#define features_h
+#ifndef menu_functions_h
+#define menu_functions_h
 #include <iostream>
 // Class Method Declarations for the feature of the project
 
@@ -13,7 +13,7 @@ struct CoffeeMenu {
 };
 
 
-class Features {
+class MenuFunctions {
     private:
     // Private Variables
 

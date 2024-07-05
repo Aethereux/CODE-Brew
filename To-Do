@@ -1,0 +1,48 @@
+Program Features :
+
+(User UI)
+1. Menu Selection - Items and Prices
+ 1.a. Make a struct dedicated for the menu with fixed values.
+ Example:
+    struct Menu {
+        string name;
+        float price;
+
+        Menu(string name, float price) : name(name), price(price) {}
+    };
+
+    // Main
+    int size = 3;
+    Menu CoffeeMenu[size];
+
+    CoffeeMenu[0] = Menu("Espresso", 99.99);
+    CoffeeMenu[1] = Menu("Latte", 20.99);
+    And so on...
+
+2. Add and Delete from Cart
+3. Redeem Coupons/Vouchers
+4. Order and Save the Order to the Database
+5. Display Receipt and Order Number (including tax)
+
+(Admin UI):
+1. Create a Voucher System that can be used in User UI which saves the voucher to the database
+ 1.a. Voucher Struct (Consists of Datas)
+    - String Variable "voucherCode"
+    - String Variable "value"
+    - String Variable "expiryDate"
+    - String Variable "status"
+    - A constructor with a initializer to assign values to the variables once an instance of Voucher struc has been made.
+
+ 1.b. VoucherSystem Class (Where all the functions are made)
+    - A method that creates the Voucher Code and saves to the database
+    - A method that removes the voucher once the status is "Claimed"
+    - 
+2. Database Management Feature: Which automatically do the following:
+ 2.a. Add All Sales
+ 2.b. Calculate the Average Sales per week
+ 2.c. Calculate the Percentage of the income per week and Compare if the week's income increased or decreased
+3. Display the Average Sales Per week and Percentage of the income increased/decreased and save to a txt file
+
+
+
+

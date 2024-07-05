@@ -1,12 +1,10 @@
 #include <iostream>
-#include "features.h"
+#include "MenuFunctions.h"
 
 // This is the main file where we will run the program
 using namespace std;
 
-main () {
+int main () {
     
-
-
 
 }
