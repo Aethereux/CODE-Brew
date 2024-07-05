@@ -19,8 +19,7 @@ class MenuFunctions {
 
     public:
     // Public Variables
-
-
+    void displayMenu();
 };
 
 

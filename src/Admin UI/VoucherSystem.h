@@ -1,6 +1,8 @@
 #ifndef VOUCHER_SYSTEM_H
 #define VOUCHER_SYSTEM_H
 #include <iostream>
+#include <fstream>
+#include <vector>
 
 using namespace std;
 
@@ -22,6 +24,7 @@ struct Voucher {
 class VoucherSystem {
     private:
     // Private Variables
+    vector<Voucher> vouchers;
     
     public:
     // Methods

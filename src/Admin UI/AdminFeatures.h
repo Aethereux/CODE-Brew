@@ -3,7 +3,7 @@
 
 class Admin {
     private:
-
+    
     public:
         
 };
