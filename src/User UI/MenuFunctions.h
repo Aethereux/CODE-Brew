@@ -15,9 +15,6 @@ struct Menu {
 };
 
 class MenuFunctions {
-    private:
-    // Private Variables
-
     public:
     // Public Variables
     void displayMenu();

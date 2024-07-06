@@ -1,6 +1,5 @@
 #include <iostream>
 #include "MenuFunctions.h"
-#include <iostream>
 
 // this file is where we will define the methods of the MenuFunctions class
 
@@ -37,11 +36,11 @@ vector<Menu> Pastries = {
 void MenuFunctions::displayMenu() {
     cout << "Coffee" << endl;
     for (Menu item : Coffee) {
-        cout << item.name << " " << item.price << " PHP"<< endl;
+        cout << item.name << " " << item.price << " PHP" << endl;
     }
-    cout << "Frappes" << endl;
+    cout << "Frappes:" << endl;
     for (Menu item : Frappes) {
-        cout << item.name << " " << item.price << " PHP"<< endl;
+        cout << item.name << " " << item.price << " PHP" << endl;
     }
     cout << "Refreshers" << endl;
     for (Menu item : Refreshers) {
