@@ -1,5 +1,5 @@
 #include <iostream>
-#include "MenuFunctions.cpp"
+#include "MenuFunctions.h"
 
 // This is the main file where we will run the program
 using namespace std;

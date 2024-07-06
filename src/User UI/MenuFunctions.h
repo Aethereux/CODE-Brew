@@ -14,34 +14,6 @@ struct Menu {
     Menu(string n, double p) : name(n), price(p) {}
 };
 
-vector<Menu> Coffee = {
-    {"Espresso", 50.00},
-    {"Kape HAHA", 69},
-    // Add More Coffee
-};
-
-vector<Menu> Frappes = {
-    {"Mocha Frappe", 100.00},
-    // Add More Frappes
-};
-vector<Menu> Refreshers = {
-    {"Refresher Drink", 69.99},
-    // Add More Refreshers
-};
-vector<Menu> Sandwhiches {
-    // Add More Sandwhiches
-};
-vector<Menu> Pastas {
-    {"Carbonara", 150.00},
-    // Add More Pastas
-
-};
-vector<Menu> Pastries = {
-    {"Croissant", 50.00},
-    // Add More Pastries
-};
-
-
 class MenuFunctions {
     private:
     // Private Variables
