@@ -12,10 +12,10 @@ using namespace std;
 class Orders {
     private:
     // Private Variables
-    vector<CoffeeMenu> orderList;
+    vector<Menu> orderList;
     public:
     // Methods
-    void addOrdeToDatabase(CoffeeMenu &order);
+    void addOrderToDatabase(Menu &order);
 };
 
 
