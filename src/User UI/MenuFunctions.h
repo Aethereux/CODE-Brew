@@ -20,6 +20,13 @@ class MenuFunctions {
     void displayMenu();
 };
 
+extern vector<Menu> Coffee;
+extern vector<Menu> Frappes;
+extern vector<Menu> Refreshers;
+extern vector<Menu> Sandwhiches;
+extern vector<Menu> Pastas;
+extern vector<Menu> Pastries;
+
 
 
 #endif
