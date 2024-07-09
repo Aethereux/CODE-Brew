@@ -7,7 +7,7 @@ project(CODE-Brew)
 include_directories(../Database)
 
 # add the UserUI executable
-add_executable(UserUI ../src/User\ UI/userui.cpp ../src/User\ UI/MenuFunctions.cpp)
+add_executable(UserUI ../src/User\ UI/userui.cpp ../src/User\ UI/MenuFunctions.cpp ../src/User UI/MenuFunctions.hs)
 
 # add_executable(AdminUI ../src/Admin\ UI/adminui.cpp ../src/Admin\ UI/AdminFeatures.cpp ../src/Admin\ UI/VoucherSystem.cpp)
 
