@@ -10,7 +10,7 @@ struct Menu {
     // Menu Structure
     string name;
     double price;
-
+    int ewan;
     Menu(string n, double p) : name(n), price(p) {}
 };
 
