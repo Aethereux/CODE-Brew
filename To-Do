@@ -11,14 +11,6 @@ Program Features :
         Menu(string name, float price) : name(name), price(price) {}
     };
 
-    // Main
-    int size = 3;
-    Menu CoffeeMenu[size];
-
-    CoffeeMenu[0] = Menu("Espresso", 99.99);
-    CoffeeMenu[1] = Menu("Latte", 20.99);
-    And so on...
-
 2. Add and Delete from Cart
 3. Redeem Coupons/Vouchers
 4. Order and Save the Order to the Database

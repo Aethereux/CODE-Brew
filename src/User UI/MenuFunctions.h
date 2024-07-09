@@ -18,6 +18,7 @@ class MenuFunctions {
     public:
     // Public Variables
     void displayMenu();
+    void orderMenu();
 };
 
 extern vector<Menu> Coffee;
