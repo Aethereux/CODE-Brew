@@ -9,9 +9,9 @@ using namespace std;
 struct Menu {
     // Menu Structure
     string name;
-    double price;
+    double medium, large;
 
-    Menu(string n, double p) : name(n), price(p) {}
+    Menu(string n, double m, double l) : name(n), medium(m), large(l) {}
 };
 
 class MenuFunctions {
