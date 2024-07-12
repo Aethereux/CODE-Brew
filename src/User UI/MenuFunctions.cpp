@@ -1,6 +1,7 @@
 #include <iostream>
 #include "MenuFunctions.h"
-
+#include <conio.h>
+#include <string>
 // this file is where we will define the methods of the MenuFunctions class
 
 using namespace std;
@@ -15,7 +16,6 @@ vector<Menu> Coffee = {
    {"Matcha Latte", 100.00, 110.00},
    // Add More Coffee
 };
-
 
 vector<Menu> Frappes = {
    {"Mocha Frappe", 130.00, 150.00},
@@ -88,3 +88,20 @@ void MenuFunctions::displayMenu() {
         cout << item.name << " " << item.medium << " PHP" << endl;
     }
 }
+
+void MenuFunctions::orderForm() {
+    // Order Menu
+    string item;
+    string size;
+    cout << "Enter the name of the item you want to order: ";
+    getline(cin, item);
+    
+    addOrder(item);
+    cout << "\nOrder Successful!\n";
+    cout << "You ordered: ";
+    for (string i : currentOrder) {
+        if (i == item)
+            cout << endl << i;
+    }
+}
+

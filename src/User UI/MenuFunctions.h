@@ -1,7 +1,7 @@
 #ifndef menu_functions_h
 #define menu_functions_h
 #include <iostream>
-#include <vector>
+#include <vector>   
 // Class Method Declarations for the feature of the project
 
 using namespace std;
@@ -14,20 +14,27 @@ struct Menu {
     Menu(string n, double m, double l) : name(n), medium(m), large(l) {}
 };
 
+
+struct Order {
+    // Order Structure
+    string name;
+    double price;
+
+    Order(string n, double p) : name(n), price(p) {}
+};
+
 class MenuFunctions {
+    private:
+    // Private Variables
+    vector<string> currentOrder;
+    vector<Order> orders;
     public:
     // Public Variables
     void displayMenu();
-    void orderMenu();
+    void orderForm();
+    void addOrder(string &i);
+    void removeOrder(string &i);
+
 };
-
-extern vector<Menu> Coffee;
-extern vector<Menu> Frappes;
-extern vector<Menu> Refreshers;
-extern vector<Menu> Sandwhiches;
-extern vector<Menu> Pastas;
-extern vector<Menu> Pastries;
-
-
 
 #endif
