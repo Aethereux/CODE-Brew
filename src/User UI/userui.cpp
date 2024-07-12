@@ -5,7 +5,7 @@
 // This is the main file where we will run the program
 using namespace std;
 
-void displayMenu(int selected, string menuItems[], int size) {
+void selectMenu(int selected, string menuItems[], int size) {
     for (int i = 0; i < size; i++) {
         if (i == selected) {
             cout << ">> ";
@@ -13,6 +13,20 @@ void displayMenu(int selected, string menuItems[], int size) {
             cout << "   ";
         }
         cout << menuItems[i] << endl;
+    }
+}
+
+void selectorVector(int selected, vector<Menu> menuItems) {
+    for (int i = 0; i < menuItems.size(); i++) {
+        if (i == selected) {
+            cout << ">> ";
+        } else {
+            cout << "   ";
+        }
+        if (menuItems[i].large != 0)
+            cout << menuItems[i].name << " " << menuItems[i].medium << " PHP " << menuItems[i].large << " PHP " << endl;
+        else 
+            cout << menuItems[i].name << " " <<  menuItems[i].medium << " PHP" << endl;
     }
 }
 
@@ -45,7 +59,7 @@ int main () {
         system("cls");
         cout << "Hello! Welcome to Code-Brew Cafe!" << endl;
         cout << "What Would you like today?" << endl;
-        displayMenu(selected, menuItems, size);
+        selectMenu(selected, menuItems, size);
 
         arrowKeySelection(selected, size, ch);
         
@@ -53,15 +67,20 @@ int main () {
             switch(selected) {
                 case 0:
                     // Order
-                    int foodSelection = 0;
-                    cout << "Please Choose from the Following: ";
-                    displayMenu(foodSelection, foodItems, foodSize);
-                    arrowKeySelection(foodSelection, size, ch);
+                    selected = 0;
+                    while(true) {
+                    system("cls");
+                    cout << "Please Choose from the Following:\n";
+                    selectMenu(selected, foodItems, foodSize);
+                    arrowKeySelection(selected, foodSize, ch);
 
                     if (ch == 13) {
-                        switch (foodSelection) {
+                        switch (selected) {
                         case 0:
+                        system("cls");
                             // A function to call to display Coffee Menu
+                            menu.orderForm(0, foodItems, foodSize);
+                            system("pause");
                             break;
                         case 1:
                             // A Function to call to display Frappes Menu
@@ -80,6 +99,9 @@ int main () {
                             break;
                         }
                     }
+
+                }
+
                     system("pause");
                     break;
                 case 1:
@@ -105,6 +127,4 @@ int main () {
             break;
         }
     }
-
-
  }

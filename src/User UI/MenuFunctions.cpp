@@ -34,7 +34,7 @@ vector<Menu> Refreshers = {
    {"Lemon Iced Tea", 50.00, 60.00}
    // Add More Refreshers
 };
-vector<Menu> Sandwhiches {
+vector<Menu> Sandwiches {
    {"Hello World Sandwich", 100.00, 0},
    {"Compiled Ham and Cheese Sandwiches", 130.00, 0},
    {"Peanut Butter and Jelly Sandwich", 130.00, 0},
@@ -60,48 +60,80 @@ vector<Menu> Pastries = {
    // Add More Pastries
 };
 
-
-
-void MenuFunctions::displayMenu() {
-    cout << "Coffee" << endl;
-    for (Menu item : Coffee) {
-        cout << item.name << " " << item.medium << " PHP " << item.large << " PHP" << endl;
+void MenuFunctions::displayMenu(int input) {
+    switch(input) {
+        case 0:
+            cout << "Coffee" << endl;
+            for (Menu item : Coffee) {
+                cout << item.medium << " PHP " << item.large << " PHP" << endl;
+            }
+            break;
+        case 1:
+            cout << "Frappes:" << endl;
+            for (Menu item : Frappes) {
+                cout << item.medium << " PHP " << item.large << " PHP" << endl;
+            }
+            break;
+        case 2:
+            cout << "Refreshers" << endl;
+            for (Menu item : Refreshers) {
+                cout << item.medium << " PHP " << item.large << " PHP" << endl;
+            }
+            break;
+        case 3:
+            cout << "Sandwiches" << endl;
+            for (Menu item : Sandwiches) {
+                cout << item.medium << " PHP" << endl;
+            }
+            break;
+        case 4:
+            cout << "Pastas" << endl;
+            for (Menu item : Pastas) {
+                cout << " " << item.medium << " PHP" << endl;
+            }
+            break;
+        case 5:
+            cout << "Pastries" << endl;
+            for (Menu item : Pastries) {
+                cout << " " << item.medium << " PHP" << endl;
+            }
+            break;
     }
-    cout << "Frappes:" << endl;
-    for (Menu item : Frappes) {
-        cout << item.name << " " << item.medium << " PHP " << item.large << " PHP" << endl;
-    }
-    cout << "Refreshers" << endl;
-    for (Menu item : Refreshers) {
-        cout << item.name << " " << item.medium << " PHP " << item.large << " PHP" << endl;
-    }
-    cout << "Sandwhiches" << endl;
-    for (Menu item : Sandwhiches) {
-        cout << item.name << " " << item.medium << " PHP" << endl;
-    }
-    cout << "Pastas" << endl;
-    for (Menu item : Pastas) {
-        cout << item.name << " " << item.medium << " PHP" << endl;
-    }
-    cout << "Pastries" << endl;
-    for (Menu item : Pastries) {
-        cout << item.name << " " << item.medium << " PHP" << endl;
-    }
-}
-
-void MenuFunctions::orderForm() {
-    // Order Menu
-    string item;
-    string size;
-    cout << "Enter the name of the item you want to order: ";
-    getline(cin, item);
     
-    addOrder(item);
-    cout << "\nOrder Successful!\n";
-    cout << "You ordered: ";
-    for (string i : currentOrder) {
-        if (i == item)
-            cout << endl << i;
-    }
 }
+
+void MenuFunctions::orderForm(int c, string items[], int foodSize) {
+    // Order Menu
+    string *item; 
+    int sizeSelection = 0, ch = 0;
+
+        while(true){
+            system("cls");
+            switch(c) {
+            case 0:
+                system("cls");
+                selectorVector(sizeSelection, Coffee);
+                arrowKeySelection(sizeSelection, foodSize, ch);
+                break;
+            case 1:
+                selectorVector(sizeSelection, Frappes);
+                break;
+            case 2:
+                selectorVector(sizeSelection, Refreshers);
+                break;
+            case 3: 
+                selectorVector(sizeSelection, Sandwiches);
+                break;
+            case 4:
+                selectorVector(sizeSelection, Pastas);
+                break;
+            case 5:
+                selectorVector(sizeSelection, Pastries);
+                break;
+            }
+            
+        }
+}
+
+
 
