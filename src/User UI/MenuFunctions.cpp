@@ -14,6 +14,7 @@ vector<Menu> Coffee = {
    {"Cof++", 100.00, 110.00},
    {"Caramel Macchiato", 100.00, 110.00},
    {"Matcha Latte", 100.00, 110.00},
+   {"Back", 0.00, 0.00}
    // Add More Coffee
 };
 
@@ -23,7 +24,8 @@ vector<Menu> Frappes = {
    {"C-Frappe", 130.00, 150.00},
    {"Strawberry Frappe", 130.00, 150.00},
    {"Caramel Frappe", 130.00, 150.00},
-   {"Cookies and Cream", 140.00, 160.00}
+   {"Cookies and Cream", 140.00, 160.00},
+   {"Back", 0.00, 0.00}
    // Add More Frappes
 };
 vector<Menu> Refreshers = {
@@ -31,7 +33,8 @@ vector<Menu> Refreshers = {
    {"JavaSip - Strawberry", 60.00, 75.00},
    {"JavaSip - Mango" , 60.00, 75.00},
    {"JavaSip - Lemonade", 60.00, 75.00},
-   {"Lemon Iced Tea", 50.00, 60.00}
+   {"Lemon Iced Tea", 50.00, 60.00},
+   {"Back", 0.00, 0.00}
    // Add More Refreshers
 };
 vector<Menu> Sandwiches {
@@ -39,7 +42,8 @@ vector<Menu> Sandwiches {
    {"Compiled Ham and Cheese Sandwiches", 130.00, 0},
    {"Peanut Butter and Jelly Sandwich", 130.00, 0},
    {"Egg Sandwich", 110.00, 0},
-   {"Cheesy Hotdog", 120.00, 0}
+   {"Cheesy Hotdog", 120.00, 0},
+   {"Back", 0.00, 0.00}
    // Add More Sandwhiches
 };
 vector<Menu> Pastas {
@@ -48,6 +52,7 @@ vector<Menu> Pastas {
    {"Pesto", 130.00, 0},
    {"Truffle Pasta", 180.00, 0},
    {"Charlie Chan", 200.00, 0},
+   {"Back", 0.00, 0.00}
    // Add More Pastas
 };
 vector<Menu> Pastries = {
@@ -56,84 +61,236 @@ vector<Menu> Pastries = {
    {"cin.namon Roll", 60.00, 0},
    {"Peanut Butter Chocolate Mousse Pie-thon", 60.00, 0},
    {"S'mores Cookies",60.00, 0},
-   {"Cookie Peasant", 60.00, 0}
+   {"Cookie Peasant", 60.00, 0},
+   {"Back", 0.00, 0.00}
    // Add More Pastries
 };
 
-void MenuFunctions::displayMenu(int input) {
-    switch(input) {
-        case 0:
-            cout << "Coffee" << endl;
-            for (Menu item : Coffee) {
-                cout << item.medium << " PHP " << item.large << " PHP" << endl;
-            }
-            break;
-        case 1:
-            cout << "Frappes:" << endl;
-            for (Menu item : Frappes) {
-                cout << item.medium << " PHP " << item.large << " PHP" << endl;
-            }
-            break;
-        case 2:
-            cout << "Refreshers" << endl;
-            for (Menu item : Refreshers) {
-                cout << item.medium << " PHP " << item.large << " PHP" << endl;
-            }
-            break;
-        case 3:
-            cout << "Sandwiches" << endl;
-            for (Menu item : Sandwiches) {
-                cout << item.medium << " PHP" << endl;
-            }
-            break;
-        case 4:
-            cout << "Pastas" << endl;
-            for (Menu item : Pastas) {
-                cout << " " << item.medium << " PHP" << endl;
-            }
-            break;
-        case 5:
-            cout << "Pastries" << endl;
-            for (Menu item : Pastries) {
-                cout << " " << item.medium << " PHP" << endl;
-            }
-            break;
-    }
-    
-}
 
-void MenuFunctions::orderForm(int c, string items[], int foodSize) {
-    // Order Menu
-    string *item; 
-    int sizeSelection = 0, ch = 0;
 
-        while(true){
-            system("cls");
-            switch(c) {
-            case 0:
-                system("cls");
-                selectorVector(sizeSelection, Coffee);
-                arrowKeySelection(sizeSelection, foodSize, ch);
-                break;
-            case 1:
-                selectorVector(sizeSelection, Frappes);
-                break;
-            case 2:
-                selectorVector(sizeSelection, Refreshers);
-                break;
-            case 3: 
-                selectorVector(sizeSelection, Sandwiches);
-                break;
-            case 4:
-                selectorVector(sizeSelection, Pastas);
-                break;
-            case 5:
-                selectorVector(sizeSelection, Pastries);
-                break;
-            }
-            
+void MenuFunctions::selector(int selected, string menuItems[], int size) {
+    for (int i = 0; i < size; i++) {
+        if (i == selected) {
+            cout << ">> ";
+        } else {
+            cout << "   ";
         }
+        cout << menuItems[i] << endl;
+    }
 }
 
+void MenuFunctions::arrowKeySelection(int &selected, int size, int &ch) {
+    ch = getch();
+            if (ch == 224) {  // Arrow keys start with 224
+                switch (getch()) {
+                    case 72:  // Up arrow
+                        selected = (selected - 1 + size) % size;
+                        break;
+                    case 80:  // Down arrow
+                        selected = (selected + 1) % size;
+                        break;
+                }
+            }
+}
 
+void MenuFunctions::order_or_TakeOut(string orderOrTakeOut) {
+    const int size = 2;
+    int selected = 0, ch = 0;
+    string display[size] = {"Order", "Take Out"};
+    string finalChoice;
+    
+    while (ch != 13){
+        system("cls");
+        cout << "Welcome to Code-Brew!" << endl;
+        selector(selected, display, size);
+        arrowKeySelection(selected, size, ch);
+    }
+
+    if (ch == 13) {
+        switch (selected) {
+            case 0:
+            finalChoice = "Order";
+            break;
+            case 1:
+            finalChoice = "Take Out";
+            break;  
+        }
+    }
+
+    orderOrTakeOut = finalChoice;
+}
+
+void MenuFunctions::selectCategory(string *item, string &category) {
+    string finalCategoryChoice;
+    int itemSize = 7;
+    string *stringItem;
+
+    int selected = 0, ch = 0;
+    while (ch != 13) {
+        system("cls");
+        cout << "Select category: " << endl;
+        selector(selected, item, itemSize);
+        arrowKeySelection(selected, itemSize, ch);
+    }
+
+    if (ch == 13) {
+        switch (selected) {
+            case 0:
+            finalCategoryChoice = "Coffee";
+            break;
+            case 1:
+            finalCategoryChoice = "Frappes";
+            break;
+            case 2:
+            finalCategoryChoice = "Refreshers";
+            break;
+            case 3:
+            finalCategoryChoice = "Sandwiches";
+            break;
+            case 4:
+            finalCategoryChoice = "Pastas";
+            break;
+            case 5:
+            finalCategoryChoice = "Pastries";
+            break;
+            case 6:
+            finalCategoryChoice = "Back";
+            break;
+        }
+    }
+
+    category = finalCategoryChoice;
+}
+
+void OrderFunctions::displayMenu(string itemCategory, string &finalItemChoice) {
+    int selected = 0, ch = 0, i, k;
+    int size;
+
+    if (itemCategory == "Coffee"){
+        size = Coffee.size();
+        while(ch != 13) {
+            system("cls");
+            cout << "Select Coffee: " << endl;
+            OrderFunctions::selector(selected, Coffee, size);
+            OrderFunctions::arrowKeySelection(selected, size, ch);
+        }
+        if (ch == 13) {
+            if (Coffee[selected].name == "Back") {
+                finalItemChoice = "Back";
+                return;
+            }
+            cout << "You selected: " << Coffee[selected].name << endl;
+            finalItemChoice = Coffee[selected].name;
+        }
+    }
+
+    if (itemCategory == "Frappes") {
+        size = Frappes.size();
+        while(ch != 13) {
+            system("cls");
+            cout << "Select Frappes: " << endl;
+            OrderFunctions::selector(selected, Frappes, size);
+            OrderFunctions::arrowKeySelection(selected, size, ch);
+        }
+
+        if (ch == 13) {
+            if (Frappes[selected].name == "Back") {
+                finalItemChoice = "Back";
+                return;
+            }
+            cout << "You selected: " << Frappes[selected].name << endl;
+            finalItemChoice = Frappes[selected].name;
+        }
+    }
+
+    if (itemCategory == "Refreshers") {
+        size = Refreshers.size();
+        while(ch != 13) {
+            system("cls");
+            cout << "Select Refreshers: " << endl;
+            OrderFunctions::selector(selected, Refreshers, size);
+            OrderFunctions::arrowKeySelection(selected, size, ch);
+        }
+
+        if (ch == 13) {
+            if (Refreshers[selected].name == "Back") {
+                finalItemChoice = "Back";
+                return;
+            }
+            cout << "You selected: " << Refreshers[selected].name << endl;
+            finalItemChoice = Refreshers[selected].name;
+        }
+    }
+
+    if (itemCategory == "Sandwiches") {
+        size = Sandwiches.size();
+        while(ch != 13) {
+            system("cls");
+            cout << "Select Sandwiches: " << endl;
+            OrderFunctions::selector(selected, Sandwiches, size);
+            OrderFunctions::arrowKeySelection(selected, size, ch);
+        }
+
+        if (ch == 13) {
+            if (Sandwiches[selected].name == "Back") {
+                finalItemChoice = "Back";
+                return;
+            }
+            cout << "You selected: " << Sandwiches[selected].name << endl;
+            finalItemChoice = Sandwiches[selected].name;
+        }
+
+    }
+
+    if (itemCategory == "Pastas") {
+        size = Pastas.size();
+        while(ch != 13) {
+            system("cls");
+            cout << "Select Pastas: " << endl;
+            OrderFunctions::selector(selected, Pastas, size);
+            OrderFunctions::arrowKeySelection(selected, size, ch);
+        }
+
+        if (ch == 13) {
+            if (Pastas[selected].name == "Back") {
+                finalItemChoice = "Back";
+                return;
+            }
+            cout << "You selected: " << Pastas[selected].name << endl;
+            finalItemChoice = Pastas[selected].name;
+        }
+    }
+
+    if (itemCategory == "Pastries") {
+        size = Pastries.size();
+        while(ch != 13) {
+            system("cls");
+            cout << "Select Pastries: " << endl;
+            OrderFunctions::selector(selected, Pastries, size);
+            OrderFunctions::arrowKeySelection(selected, size, ch);
+        }
+
+        if (ch == 13) {
+            if (Pastries[selected].name == "Back") {
+                finalItemChoice = "Back";
+                return;
+            }
+            cout << "You selected: " << Pastries[selected].name << endl;
+            finalItemChoice = Pastries[selected].name;
+        }
+    }
+
+}
+
+void OrderFunctions::selector(int selected, vector<Menu> &menuItems, int size) {
+    for (int i = 0; i < size; i++) {
+        if (i == selected) {
+            cout << ">> ";
+        } else {
+            cout << "   ";
+        }
+        cout << menuItems[i].name << endl;
+
+    }
+}
 

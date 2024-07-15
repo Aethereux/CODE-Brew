@@ -1,9 +1,9 @@
 *.o
 
-*.exe
-
 *.log
 
 *.vscode
 
-*CMake
+
+
+

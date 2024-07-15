@@ -1,6 +1,7 @@
 #ifndef menu_functions_h
 #define menu_functions_h
 #include <iostream>
+#include <string>
 #include <vector>   
 // Class Method Declarations for the feature of the project
 
@@ -14,11 +15,6 @@ struct Menu {
     Menu(string n, double m, double l) : name(n), medium(m), large(l) {}
 };
 
-void arrowKeySelection(int &selected, int size, int &ch);
-void selectMenu(int selected, string menuItems[], int size);
-void selectorVector(int selected, vector<Menu> menuItems);
-
-
 struct Order {
     // Order Structure
     string name;
@@ -29,20 +25,23 @@ struct Order {
 
 class MenuFunctions {
     private:
-    // Private Variables
-    vector<Order> currentOrder;
-    vector<Order> orders;
+    bool isBack = false;
     public:
     // Public Variables
-    void displayMenu(int input);
-    void orderForm(int c, string items[], int foodSize);
-    void addOrder(string &i);
-    void removeOrder(string &i);
-
-    void setOrder();
-
-    void getStringItem(int c, string *itemName);
+    void selectCategory(string *item, string &category);
+    void selector(int selected, string menuItems[], int size);
+    void arrowKeySelection(int &selected, int size, int &ch);
+    void order_or_TakeOut(string orderOrTakeOut);
     
+};
+
+class OrderFunctions : MenuFunctions {
+    private:
+
+    public:
+    void displayMenu(string itemCategory, string &finalItemChoice);
+    void selector(int selected, vector<Menu> &menuItems, int size);
+
 };
 
 extern vector<Menu> Coffee;

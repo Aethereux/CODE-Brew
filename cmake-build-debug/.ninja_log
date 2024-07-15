@@ -1,0 +1,12 @@
+# ninja log v5
+17	624	7427235322504097	CMakeFiles/CODE_Brew.dir/src/Database/OrderDataBase.cpp.obj	d90c60d91181c0eb
+22	2182	7427235338089151	CMakeFiles/CODE_Brew.dir/src/User_UI/MenuFunctions.cpp.obj	fd15f86df6cbe2ee
+5	1763	7427235333194129	CMakeFiles/CODE_Brew.dir/src/Admin_UI/AdminFeatures.cpp.obj	6d08cd29d57a59be
+13	2005	7427235336129166	CMakeFiles/CODE_Brew.dir/src/Admin_UI/VoucherSystem.cpp.obj	1229d432c8657c12
+8	2077	7427235336119162	CMakeFiles/CODE_Brew.dir/src/Admin_UI/adminui.cpp.obj	77a7a04a39b7c702
+1	2213	7427235338419141	CMakeFiles/CODE_Brew.dir/compiled_all_src_into_one/main.cpp.obj	e9b7894b30d35a9
+4	705	7427242597632047	CMakeFiles/CODE_Brew.dir/src/User_UI/userui.cpp.obj	74060e7723e6889
+0	464	7427256484725117	build.ninja	99e5418e085ba515
+3	628	7427254972336754	CODE_Brew.exe	be47743b7c76b3bc
+3	593	7427258039616052	CMakeFiles/CODE_Brew.dir/src/User_UI/userui.cpp.obj	74060e7723e6889
+594	1130	7427258044886015	CODE_Brew.exe	be47743b7c76b3bc
