@@ -1,5 +1,6 @@
 #include <iostream>
 #include "MenuFunctions.h"
+#include <iomanip>
 #include <conio.h>
 #include <string>
 // this file is where we will define the methods of the MenuFunctions class
@@ -170,7 +171,6 @@ void OrderFunctions::displayMenu(string itemCategory, string &finalItemChoice) {
         size = Coffee.size();
         while(ch != 13) {
             system("cls");
-            cout << "========== Select Coffee ===========" << endl;
             OrderFunctions::selector(selected, Coffee, size);
             OrderFunctions::arrowKeySelection(selected, size, ch);
         }
@@ -283,13 +283,30 @@ void OrderFunctions::displayMenu(string itemCategory, string &finalItemChoice) {
 }
 
 void OrderFunctions::selector(int selected, vector<Menu> &menuItems, int size) {
+    cout << "==== " << "Tite" << " ====" << endl;
+    cout << left << setw(43) << " " << setw(10) << "Medium" << setw(10) << "Large" << endl;
     for (int i = 0; i < size; i++) {
         if (i == selected) {
+            if (menuItems[i].name == "Back") {
+                cout << "\n=============================================\n";
+            }
             cout << ">> ";
         } else {
+            if (menuItems[i].name == "Back") {
+                cout << "\n=============================================\n";
+            }
             cout << "   ";
         }
-        cout << menuItems[i].name  << endl;
+        if (menuItems[i].name == "Back") {
+            cout << left << setw(40) << menuItems[i].name << endl;
+            continue;
+        }
+        // Display other items
+        cout << left << setw(40) << menuItems[i].name
+             << setw(10) << fixed << setprecision(2) << menuItems[i].medium
+             << setw(10) << fixed << setprecision(2) << menuItems[i].large << endl;
+
+
     }
 }
 

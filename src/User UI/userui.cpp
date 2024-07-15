@@ -16,12 +16,13 @@ int main () {
     OrderFunctions order;
 
     // Infinite loop to
-            m
-            order_or_takeout);
+            menu.order_or_TakeOut(order_or_takeout);
             menu.selectCategory(categoryItems, category);
-            order.displayMenu(category, itemOrder);
 
+            order.displayMenu(category, itemOrder);
             order.displaySize(itemOrder, itemSize);
+
+
 
         
 
