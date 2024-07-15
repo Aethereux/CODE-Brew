@@ -133,7 +133,7 @@ void MenuFunctions::selectCategory(string *item, string &category) {
         arrowKeySelection(selected, itemSize, ch);
     }
 
-    if (ch == 13) {
+    if (ch == 13) { // Enter
         switch (selected) {
             case 0:
             finalCategoryChoice = "Coffee";
@@ -170,7 +170,7 @@ void OrderFunctions::displayMenu(string itemCategory, string &finalItemChoice) {
         size = Coffee.size();
         while(ch != 13) {
             system("cls");
-            cout << "Select Coffee: " << endl;
+            cout << "========== Select Coffee ===========" << endl;
             OrderFunctions::selector(selected, Coffee, size);
             OrderFunctions::arrowKeySelection(selected, size, ch);
         }
@@ -289,8 +289,66 @@ void OrderFunctions::selector(int selected, vector<Menu> &menuItems, int size) {
         } else {
             cout << "   ";
         }
-        cout << menuItems[i].name << endl;
-
+        cout << menuItems[i].name  << endl;
     }
+}
+
+vector<double> OrderFunctions::getItemSize(vector<Menu> category, string &item) {
+    vector<double> itemSize;
+    for (Menu i : category) {
+        if (i.name == item) {
+            itemSize.push_back(i.medium);
+            itemSize.push_back(i.large);
+        }
+    }
+    return itemSize;
+}
+
+void OrderFunctions::selectorSize(int selected, vector<double> &itemSize, int size, string &chosenSize) {
+    for (int i = 0; i < size+1; i++) {
+        if (i == selected) {
+            cout << ">> ";
+        } else {
+            cout << "   ";
+        }
+        switch (i) {
+            case 0:
+                cout << "Medium - " << itemSize[i] << endl;
+                chosenSize = "Medium";
+                break;
+            case 1:
+                if (itemSize[i] == 0) {
+                    cout << "Back" << endl;
+                    chosenSize = "Back";
+                }
+                cout << "Large - " << itemSize[i] << endl;
+                chosenSize = "Large";
+                break;
+            case 2:
+                cout << "Back" << endl;
+                chosenSize = "Back";
+                break;
+        }
+    }
+}
+
+void OrderFunctions::displaySize(string &item, string &itemSize) {
+    int selected = 0, ch = 0, size = 0;
+        if (item == "Coffee") {
+            vector<double> drinkSize = getItemSize(Coffee, itemSize);
+            while (ch != 13) {
+                size = 2;
+                system("cls");
+                selectorSize(selected, drinkSize, size, itemSize);
+                arrowKeySelection(selected, size, ch);
+
+                if (ch == 13) {
+                    cout << "You Selected " << itemSize << endl;
+                }
+
+            }
+        }
+
+
 }
 
