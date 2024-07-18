@@ -12,11 +12,13 @@ int main () {
     string categoryItems[] = {"Coffee", "Frappes", "Refreshers", "Sandwiches", "Pastas", "Pastries", "Back"};
     string order_or_takeout, category, itemOrder, itemSize;
 
-    MenuFunctions menu;
-    OrderFunctions order;
-
+    OrderFunctions *order;
+    char choice;
     // Infinite loop to
-            order.createOrder();
+            order = new OrderFunctions();
+            order->createOrder();
+
+
 
     // test
 

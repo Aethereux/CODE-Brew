@@ -326,7 +326,6 @@ void OrderFunctions::displayMenu(string itemCategory, string &finalItemChoice) {
 
 void OrderFunctions::selector(int selected, vector<Menu> &menuItems, int size) {
     bool isLargePriceZero;
-    cout << "==== " << "Tite" << " ====" << endl;
     for (int i = 0; i < size; i++) {
         if (menuItems[i].large == 0) {
             isLargePriceZero = true;
@@ -336,20 +335,21 @@ void OrderFunctions::selector(int selected, vector<Menu> &menuItems, int size) {
         }
     }
     if (isLargePriceZero) {
-        cout << left << setw(43) << " " << setw(10) << " " << endl;
+        cout << left << setw(35) << " " << setw(10) << " " << endl;
     } else {
-        cout << left << setw(43) << " " << setw(10) << "Medium" << setw(10) << "Large" << endl;
+        cout << left << setw(35) << " " << setw(10) << "Medium" << setw(10) << "Large   |" <<endl;
+        cout<<"--------------------------------------------------------------"<<endl;
     }
 
     for (int i = 0; i < size; i++) {
         if (i == selected) {
             if (menuItems[i].name == "Back") {
-                cout << "\n=============================================\n";
+                cout << "\n------------------------------------------------\n";
             }
             cout << ">> ";
         } else {
             if (menuItems[i].name == "Back") {
-                cout << "\n=============================================\n";
+                cout << "\n-------------------------------------------------\n";
             }
             cout << "   ";
         }
@@ -360,12 +360,12 @@ void OrderFunctions::selector(int selected, vector<Menu> &menuItems, int size) {
 
         if (menuItems[i].large == 0) {
             cout << left << setw(40) << menuItems[i].name
-                 << setw(10) << fixed << setprecision(2) << menuItems[i].medium << endl;
+                 << setw(10) << fixed << setprecision(2) << menuItems[i].medium << "|"<< endl;
             continue;
         } else {
             cout << left << setw(40) << menuItems[i].name
                  << setw(10) << fixed << setprecision(2) << menuItems[i].medium
-                 << setw(10) << fixed << setprecision(2) << menuItems[i].large << endl;
+                 << setw(8) << fixed << setprecision(1) << menuItems[i].large  << "|" << endl;
         }
     }
 }
@@ -525,7 +525,7 @@ void OrderFunctions::addQuantity() {
 }
 
 void OrderFunctions::createOrder() {
-    static char choice;
+    static char choice = ' ';
     if (choice == ' ')
         order_or_TakeOut(this->order_or_takeout);
 
@@ -552,8 +552,9 @@ void OrderFunctions::createOrder() {
     addQuantity();
 
     cout << "\nAdd To Cart? (Y/N): "; cin >> choice;
-    if (choice == 'N' || choice == 'n')
+    if (choice == 'N' || choice == 'n') {
         createOrder(); // recursion
+    }
 
     addToCart(this->itemOrder, this->itemSize, 0, this->quantity);
 

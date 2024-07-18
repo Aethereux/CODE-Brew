@@ -25,31 +25,31 @@ struct Order {
 };
 
 class MenuFunctions {
-private:
-public:
+    private:
+    public:
     // Public Variables
     void selectCategory(string *item, string &category);
-    virtual void selector(int selected, string menuItems[], int size);
-    virtual void arrowKeySelection(int &selected, int size, int &ch);
-    virtual void order_or_TakeOut(string orderOrTakeOut);
+    void selector(int selected, string menuItems[], int size);
+    void arrowKeySelection(int &selected, int size, int &ch);
+    void order_or_TakeOut(string orderOrTakeOut);
 
 };
 
 class OrderFunctions : MenuFunctions {
-private:
+    private:
     string categoryItems[7] = {"Coffee", "Frappes", "Refreshers", "Sandwiches", "Pastas", "Pastries", "Back"};
     string order_or_takeout, category, itemOrder, itemSize;
     int quantity;
     vector<Order> orderList;
-public:
+    public:
     OrderFunctions() {
 
     };
     //function to create an order
-    void createOrder();
-    void addToCart(string name, string size, double price, int &quanity);
+    void addToCart(string name, string size, double price, int &quantity);
     void deleteFromCart(int index);
     void displayCart();
+    void createOrder();
     void addQuantity();
     vector<double> getItemPrice(vector<Menu> category, string &item);
     void displayMenu(string itemCategory, string &finalItemChoice);
@@ -57,7 +57,7 @@ public:
     void selectorSizeBeverages(int selected, vector<double> &itemSize, int size, string &chosenSize);
     void selectorSizeFoods(int selected, vector<double> &itemSize, int size, string &chosenSize);
     void displaySize(string &item, string &itemSize, string &itemCategory);
-    double getPrice(string item, string size);
+    double getPrice(string item, string itemSize);
 };
 
 extern vector<Menu> Coffee;
