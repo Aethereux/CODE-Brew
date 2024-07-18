@@ -20,11 +20,11 @@ int main () {
             menu.selectCategory(categoryItems, category);
 
             order.displayMenu(category, itemOrder);
-            order.displaySize(itemOrder, itemSize);
+            order.displaySize(itemOrder, itemSize, category);
 
 
 
-        
+
 
         system("pause");
 

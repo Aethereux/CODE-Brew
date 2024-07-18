@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <conio.h>
 #include <string>
+#include <map>
 // this file is where we will define the methods of the MenuFunctions class
 
 using namespace std;
@@ -65,6 +66,47 @@ vector<Menu> Pastries = {
    {"Cookie Peasant", 60.00, 0},
    {"Back", 0.00, 0.00}
    // Add More Pastries
+};
+
+map<string, vector<Menu>> itemCategoryMap = {
+        {"Espresso", Coffee},
+        {"CODE BREW", Coffee},
+        {"Coffee float", Coffee},
+        {"Cof++", Coffee},
+        {"Caramel Macchiato", Coffee},
+        {"Matcha Latte", Coffee},
+
+        {"Mocha Frappe", Frappes},
+        {"JavaChip", Frappes},
+        {"C-Frappe", Frappes},
+        {"Strawberry Frappe", Frappes},
+        {"Caramel Frappe", Frappes},
+        {"Cookies and Cream", Frappes},
+
+        {"JavaSip - Green Apple", Refreshers},
+        {"JavaSip - Strawberry", Refreshers},
+        {"JavaSip - Mango", Refreshers},
+        {"JavaSip - Lemonade", Refreshers},
+        {"Lemon Iced Tea", Refreshers},
+
+        {"Hello World Sandwich", Sandwiches},
+        {"Compiled Ham and Cheese Sandwiches", Sandwiches},
+        {"Peanut Butter and Jelly Sandwich", Sandwiches},
+        {"Egg Sandwich", Sandwiches},
+        {"Cheesy Hotdog", Sandwiches},
+
+        {"Carbonara", Pastas},
+        {"Spaghetti", Pastas},
+        {"Pesto", Pastas},
+        {"Truffle Pasta", Pastas},
+        {"Charlie Chan", Pastas},
+
+        {"Cookie Croissant", Pastries},
+        {"Chocolate Chip Cookie Bytes", Pastries},
+        {"cin.namon Roll", Pastries},
+        {"Peanut Butter Chocolate Mousse Pie-thon", Pastries},
+        {"S'mores Cookies", Pastries},
+        {"Cookie Peasant", Pastries}
 };
 
 
@@ -301,7 +343,6 @@ void OrderFunctions::selector(int selected, vector<Menu> &menuItems, int size) {
             cout << left << setw(40) << menuItems[i].name << endl;
             continue;
         }
-        // Display other items
         cout << left << setw(40) << menuItems[i].name
              << setw(10) << fixed << setprecision(2) << menuItems[i].medium
              << setw(10) << fixed << setprecision(2) << menuItems[i].large << endl;
@@ -310,62 +351,77 @@ void OrderFunctions::selector(int selected, vector<Menu> &menuItems, int size) {
     }
 }
 
-vector<double> OrderFunctions::getItemSize(vector<Menu> category, string &item) {
+
+
+vector<double> OrderFunctions::getItemPrice(vector<Menu> category, string &item) {
     vector<double> itemSize;
-    for (Menu i : category) {
-        if (i.name == item) {
+    for (Menu &i : category) { // For Items that has two sizes
+        if (item == "Espresso" || item == "CODE BREW" || item == "Coffee float" || item == "Cof++" || item == "Caramel Macchiato" || item == "Matcha Latte"
+        || item == "Mocha Frappe" || item == "JavaChip" || item == "C-Frappe" || item == "Strawberry Frappe" || item == "Caramel Frappe" || item == "Cookies and Cream"
+        || item == "JavaSip - Green Apple" || item == "JavaSip - Strawberry" || item == "JavaSip - Mango" || item == "JavaSip - Lemonade" || item == "Lemon Iced Tea") {
             itemSize.push_back(i.medium);
             itemSize.push_back(i.large);
+            itemSize.push_back(0);
+        } else { // For items that only have one size
+            itemSize.push_back(i.medium);
+            itemSize.push_back(0);
         }
+
     }
     return itemSize;
 }
 
-void OrderFunctions::selectorSize(int selected, vector<double> &itemSize, int size, string &chosenSize) {
-    for (int i = 0; i < size+1; i++) {
+void OrderFunctions::selectorSize(int selected, vector<double> &itemPrice, int size, string &chosenSize) {
+    string tempSize; // Temporary variable to hold the current selection
+    for (int i = 0; i < size; i++) {
         if (i == selected) {
             cout << ">> ";
         } else {
             cout << "   ";
         }
-        switch (i) {
-            case 0:
-                cout << "Medium - " << itemSize[i] << endl;
-                chosenSize = "Medium";
-                break;
-            case 1:
-                if (itemSize[i] == 0) {
+        if (i < itemPrice.size() && itemPrice[i] == 0.00) {
+            cout << "Back" << endl;
+            if (i == selected) tempSize = "Back";
+            break;
+        } else {
+            switch (i) {
+                case 0:
+                    cout << "Medium - " << itemPrice[i] << endl;
+                    if (i == selected) tempSize = "Medium";
+                    break;
+                case 1:
+                    if(itemPrice[i] == 0) break;
+                    cout << "Large - " << itemPrice[i] << endl;
+                    if (i == selected) tempSize = "Large";
+                    break;
+                default:
                     cout << "Back" << endl;
-                    chosenSize = "Back";
-                }
-                cout << "Large - " << itemSize[i] << endl;
-                chosenSize = "Large";
-                break;
-            case 2:
-                cout << "Back" << endl;
-                chosenSize = "Back";
-                break;
-        }
-    }
-}
-
-void OrderFunctions::displaySize(string &item, string &itemSize) {
-    int selected = 0, ch = 0, size = 0;
-        if (item == "Coffee") {
-            vector<double> drinkSize = getItemSize(Coffee, itemSize);
-            while (ch != 13) {
-                size = 2;
-                system("cls");
-                selectorSize(selected, drinkSize, size, itemSize);
-                arrowKeySelection(selected, size, ch);
-
-                if (ch == 13) {
-                    cout << "You Selected " << itemSize << endl;
-                }
-
+                    if (i == selected) tempSize = "Back";
+                    break;
             }
         }
+    }
+    chosenSize = tempSize;
+}
 
-
+void OrderFunctions::displaySize(string &item, string &itemSize, string &itemCategory) {
+    int selected = 0, ch = 0, size = 0;
+    auto it = itemCategoryMap.find(item);
+    if (it != itemCategoryMap.end()) {
+        vector<double> itemPrice = getItemPrice(it->second, item);
+        if (itemCategory == "Sandwiches" || itemCategory == "Pastas" || itemCategory == "Pastries") {
+            size = 2;
+        } else {
+            size = 3;
+        }
+        while (ch != 13) {
+            system("cls");
+            selectorSize(selected, itemPrice, size, itemSize);
+            arrowKeySelection(selected, size, ch);
+            if (ch == 13) {
+                cout << "You Selected " << itemSize << endl;
+            }
+        }
+    }
 }
 

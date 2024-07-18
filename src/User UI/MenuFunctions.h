@@ -25,7 +25,6 @@ struct Order {
 
 class MenuFunctions {
     private:
-    bool isBack = false;
     public:
     // Public Variables
     void selectCategory(string *item, string &category);
@@ -37,13 +36,13 @@ class MenuFunctions {
 
 class OrderFunctions : MenuFunctions {
     private:
-
+    string itemCategory;
     public:
     void displayMenu(string itemCategory, string &finalItemChoice);
     void selector(int selected, vector<Menu> &menuItems, int size);
     void selectorSize(int selected, vector<double> &itemSize, int size, string &chosenSize);
-    void displaySize(string &item, string &itemSize);
-    vector<double> getItemSize(vector<Menu> item, string &selected);
+    void displaySize(string &item, string &itemSize, string &itemCategory);
+    vector<double> getItemPrice(vector<Menu> category, string &item);
 };
 
 extern vector<Menu> Coffee;
