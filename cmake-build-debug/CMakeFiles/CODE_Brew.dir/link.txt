@@ -1,3 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2024.1.4\bin\cmake\win\x64\bin\cmake.exe" -E rm -f CMakeFiles\CODE_Brew.dir/objects.a
-C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\ar.exe qc CMakeFiles\CODE_Brew.dir/objects.a @CMakeFiles\CODE_Brew.dir\objects1.rsp
-C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE -g -static -Wl,--whole-archive CMakeFiles\CODE_Brew.dir/objects.a -Wl,--no-whole-archive -o CODE_Brew.exe -Wl,--out-implib,libCODE_Brew.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\CODE_Brew.dir\linkLibs.rsp

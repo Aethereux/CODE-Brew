@@ -10,62 +10,62 @@ using namespace std;
 
 
 vector<Menu> Coffee = {
-   {"Espresso", 100.00, 110.00},
-   {"CODE BREW", 70.00, 80.00,},
-   {"Coffee float", 100.00,120.00},
-   {"Cof++", 100.00, 110.00},
-   {"Caramel Macchiato", 100.00, 110.00},
-   {"Matcha Latte", 100.00, 110.00},
-   {"Back", 0.00, 0.00}
-   // Add More Coffee
+        {"Espresso", 100.00, 110.00},
+        {"CODE BREW", 70.00, 80.00,},
+        {"Coffee float", 100.00,120.00},
+        {"Cof++", 100.00, 110.00},
+        {"Caramel Macchiato", 100.00, 110.00},
+        {"Matcha Latte", 100.00, 110.00},
+        {"Back", 0.00, 0.00}
+        // Add More Coffee
 };
 
 vector<Menu> Frappes = {
-   {"Mocha Frappe", 130.00, 150.00},
-   {"JavaChip", 150.00, 170.00},
-   {"C-Frappe", 130.00, 150.00},
-   {"Strawberry Frappe", 130.00, 150.00},
-   {"Caramel Frappe", 130.00, 150.00},
-   {"Cookies and Cream", 140.00, 160.00},
-   {"Back", 0.00, 0.00}
-   // Add More Frappes
+        {"Mocha Frappe", 130.00, 150.00},
+        {"JavaChip", 150.00, 170.00},
+        {"C-Frappe", 130.00, 150.00},
+        {"Strawberry Frappe", 130.00, 150.00},
+        {"Caramel Frappe", 130.00, 150.00},
+        {"Cookies and Cream", 140.00, 160.00},
+        {"Back", 0.00, 0.00}
+        // Add More Frappes
 };
 vector<Menu> Refreshers = {
-   {"JavaSip - Green Apple", 60.00, 75.00},
-   {"JavaSip - Strawberry", 60.00, 75.00},
-   {"JavaSip - Mango" , 60.00, 75.00},
-   {"JavaSip - Lemonade", 60.00, 75.00},
-   {"Lemon Iced Tea", 50.00, 60.00},
-   {"Back", 0.00, 0.00}
-   // Add More Refreshers
+        {"JavaSip - Green Apple", 60.00, 75.00},
+        {"JavaSip - Strawberry", 60.00, 75.00},
+        {"JavaSip - Mango" , 60.00, 75.00},
+        {"JavaSip - Lemonade", 60.00, 75.00},
+        {"Lemon Iced Tea", 50.00, 60.00},
+        {"Back", 0.00, 0.00}
+        // Add More Refreshers
 };
 vector<Menu> Sandwiches {
-   {"Hello World Sandwich", 100.00, 0},
-   {"Compiled Ham and Cheese Sandwiches", 130.00, 0},
-   {"Peanut Butter and Jelly Sandwich", 130.00, 0},
-   {"Egg Sandwich", 110.00, 0},
-   {"Cheesy Hotdog", 120.00, 0},
-   {"Back", 0.00, 0.00}
-   // Add More Sandwhiches
+        {"Hello World Sandwich", 100.00, 0},
+        {"Compiled Ham and Cheese Sandwiches", 130.00, 0},
+        {"Peanut Butter and Jelly Sandwich", 130.00, 0},
+        {"Egg Sandwich", 110.00, 0},
+        {"Cheesy Hotdog", 120.00, 0},
+        {"Back", 0.00, 0.00}
+        // Add More Sandwhiches
 };
 vector<Menu> Pastas {
-   {"Carbonara", 150.00, 0},
-   {"Spaghetti", 100.00, 0},
-   {"Pesto", 130.00, 0},
-   {"Truffle Pasta", 180.00, 0},
-   {"Charlie Chan", 200.00, 0},
-   {"Back", 0.00, 0.00}
-   // Add More Pastas
+        {"Carbonara", 150.00, 0},
+        {"Spaghetti", 100.00, 0},
+        {"Pesto", 130.00, 0},
+        {"Truffle Pasta", 180.00, 0},
+        {"Charlie Chan", 200.00, 0},
+        {"Back", 0.00, 0.00}
+        // Add More Pastas
 };
 vector<Menu> Pastries = {
-   {"Cookie Croissant", 50.00, 0},
-   {"Chocolate Chip Cookie Bytes", 60.00, 0},
-   {"cin.namon Roll", 60.00, 0},
-   {"Peanut Butter Chocolate Mousse Pie-thon", 60.00, 0},
-   {"S'mores Cookies",60.00, 0},
-   {"Cookie Peasant", 60.00, 0},
-   {"Back", 0.00, 0.00}
-   // Add More Pastries
+        {"Cookie Croissant", 50.00, 0},
+        {"Chocolate Chip Cookie Bytes", 60.00, 0},
+        {"cin.namon Roll", 60.00, 0},
+        {"Peanut Butter Chocolate Mousse Pie-thon", 60.00, 0},
+        {"S'mores Cookies",60.00, 0},
+        {"Cookie Peasant", 60.00, 0},
+        {"Back", 0.00, 0.00}
+        // Add More Pastries
 };
 
 map<string, vector<Menu>> itemCategoryMap = {
@@ -124,16 +124,16 @@ void MenuFunctions::selector(int selected, string menuItems[], int size) {
 
 void MenuFunctions::arrowKeySelection(int &selected, int size, int &ch) {
     ch = getch();
-            if (ch == 224) {  // Arrow keys start with 224
-                switch (getch()) {
-                    case 72:  // Up arrow
-                        selected = (selected - 1 + size) % size;
-                        break;
-                    case 80:  // Down arrow
-                        selected = (selected + 1) % size;
-                        break;
-                }
-            }
+    if (ch == 224) {  // Arrow keys start with 224
+        switch (getch()) {
+            case 72:  // Up arrow
+                selected = (selected - 1 + size) % size;
+                break;
+            case 80:  // Down arrow
+                selected = (selected + 1) % size;
+                break;
+        }
+    }
 }
 
 void MenuFunctions::order_or_TakeOut(string orderOrTakeOut) {
@@ -152,14 +152,13 @@ void MenuFunctions::order_or_TakeOut(string orderOrTakeOut) {
     if (ch == 13) {
         switch (selected) {
             case 0:
-            finalChoice = "Order";
-            break;
+                finalChoice = "Order";
+                break;
             case 1:
-            finalChoice = "Take Out";
-            break;  
+                finalChoice = "Take Out";
+                break;
         }
     }
-
     orderOrTakeOut = finalChoice;
 }
 
@@ -179,26 +178,26 @@ void MenuFunctions::selectCategory(string *item, string &category) {
     if (ch == 13) { // Enter
         switch (selected) {
             case 0:
-            finalCategoryChoice = "Coffee";
-            break;
+                finalCategoryChoice = "Coffee";
+                break;
             case 1:
-            finalCategoryChoice = "Frappes";
-            break;
+                finalCategoryChoice = "Frappes";
+                break;
             case 2:
-            finalCategoryChoice = "Refreshers";
-            break;
+                finalCategoryChoice = "Refreshers";
+                break;
             case 3:
-            finalCategoryChoice = "Sandwiches";
-            break;
+                finalCategoryChoice = "Sandwiches";
+                break;
             case 4:
-            finalCategoryChoice = "Pastas";
-            break;
+                finalCategoryChoice = "Pastas";
+                break;
             case 5:
-            finalCategoryChoice = "Pastries";
-            break;
+                finalCategoryChoice = "Pastries";
+                break;
             case 6:
-            finalCategoryChoice = "Back";
-            break;
+                finalCategoryChoice = "Back";
+                break;
         }
     }
 
@@ -213,8 +212,9 @@ void OrderFunctions::displayMenu(string itemCategory, string &finalItemChoice) {
         size = Coffee.size();
         while(ch != 13) {
             system("cls");
-            OrderFunctions::selector(selected, Coffee, size);
-            OrderFunctions::arrowKeySelection(selected, size, ch);
+            cout<<"|COFFEE ";
+            selector(selected, Coffee, size);
+            arrowKeySelection(selected, size, ch);
         }
         if (ch == 13) {
             if (Coffee[selected].name == "Back") {
@@ -230,9 +230,9 @@ void OrderFunctions::displayMenu(string itemCategory, string &finalItemChoice) {
         size = Frappes.size();
         while(ch != 13) {
             system("cls");
-            cout << "Select Frappes: " << endl;
-            OrderFunctions::selector(selected, Frappes, size);
-            OrderFunctions::arrowKeySelection(selected, size, ch);
+            cout << "|FRAPPES ";
+            selector(selected, Frappes, size);
+            arrowKeySelection(selected, size, ch);
         }
 
         if (ch == 13) {
@@ -249,9 +249,9 @@ void OrderFunctions::displayMenu(string itemCategory, string &finalItemChoice) {
         size = Refreshers.size();
         while(ch != 13) {
             system("cls");
-            cout << "Select Refreshers: " << endl;
-            OrderFunctions::selector(selected, Refreshers, size);
-            OrderFunctions::arrowKeySelection(selected, size, ch);
+            cout << "|REFRESHERS ";
+            selector(selected, Refreshers, size);
+            arrowKeySelection(selected, size, ch);
         }
 
         if (ch == 13) {
@@ -268,9 +268,9 @@ void OrderFunctions::displayMenu(string itemCategory, string &finalItemChoice) {
         size = Sandwiches.size();
         while(ch != 13) {
             system("cls");
-            cout << "Select Sandwiches: " << endl;
-            OrderFunctions::selector(selected, Sandwiches, size);
-            OrderFunctions::arrowKeySelection(selected, size, ch);
+            cout << "|SANDWICHES ";
+            selector(selected, Sandwiches, size);
+            arrowKeySelection(selected, size, ch);
         }
 
         if (ch == 13) {
@@ -288,9 +288,9 @@ void OrderFunctions::displayMenu(string itemCategory, string &finalItemChoice) {
         size = Pastas.size();
         while(ch != 13) {
             system("cls");
-            cout << "Select Pastas: " << endl;
-            OrderFunctions::selector(selected, Pastas, size);
-            OrderFunctions::arrowKeySelection(selected, size, ch);
+            cout << "|PASTAS ";
+            selector(selected, Pastas, size);
+            arrowKeySelection(selected, size, ch);
         }
 
         if (ch == 13) {
@@ -307,9 +307,9 @@ void OrderFunctions::displayMenu(string itemCategory, string &finalItemChoice) {
         size = Pastries.size();
         while(ch != 13) {
             system("cls");
-            cout << "Select Pastries: " << endl;
-            OrderFunctions::selector(selected, Pastries, size);
-            OrderFunctions::arrowKeySelection(selected, size, ch);
+            cout << "|PASTRIES ";
+            selector(selected, Pastries, size);
+            arrowKeySelection(selected, size, ch);
         }
 
         if (ch == 13) {
@@ -357,14 +357,15 @@ void OrderFunctions::selector(int selected, vector<Menu> &menuItems, int size) {
             cout << left << setw(40) << menuItems[i].name << endl;
             continue;
         }
+
         if (menuItems[i].large == 0) {
             cout << left << setw(40) << menuItems[i].name
-            << setw(10) << fixed << setprecision(2) << menuItems[i].medium << endl;
+                 << setw(10) << fixed << setprecision(2) << menuItems[i].medium << endl;
             continue;
         } else {
             cout << left << setw(40) << menuItems[i].name
-            << setw(10) << fixed << setprecision(2) << menuItems[i].medium
-            << setw(10) << fixed << setprecision(2) << menuItems[i].large << endl;
+                 << setw(10) << fixed << setprecision(2) << menuItems[i].medium
+                 << setw(10) << fixed << setprecision(2) << menuItems[i].large << endl;
         }
     }
 }
@@ -375,8 +376,8 @@ vector<double> OrderFunctions::getItemPrice(vector<Menu> category, string &item)
     vector<double> itemSize;
     for (Menu &i : category) { // For Items that has two sizes
         if (item == "Espresso" || item == "CODE BREW" || item == "Coffee float" || item == "Cof++" || item == "Caramel Macchiato" || item == "Matcha Latte"
-        || item == "Mocha Frappe" || item == "JavaChip" || item == "C-Frappe" || item == "Strawberry Frappe" || item == "Caramel Frappe" || item == "Cookies and Cream"
-        || item == "JavaSip - Green Apple" || item == "JavaSip - Strawberry" || item == "JavaSip - Mango" || item == "JavaSip - Lemonade" || item == "Lemon Iced Tea") {
+            || item == "Mocha Frappe" || item == "JavaChip" || item == "C-Frappe" || item == "Strawberry Frappe" || item == "Caramel Frappe" || item == "Cookies and Cream"
+            || item == "JavaSip - Green Apple" || item == "JavaSip - Strawberry" || item == "JavaSip - Mango" || item == "JavaSip - Lemonade" || item == "Lemon Iced Tea") {
             itemSize.push_back(i.medium);
             itemSize.push_back(i.large);
             itemSize.push_back(0);
@@ -464,23 +465,23 @@ void OrderFunctions::displaySize(string &item, string &itemSize, string &itemCat
             system("cls");
             if(itemCategory == "Sandwiches" || itemCategory == "Pastas" || itemCategory == "Pastries")
                 selectorSizeFoods(selected, itemPrice, size, itemSize);
-                else
-                    selectorSizeBeverages(selected, itemPrice, size, itemSize);
+            else
+                selectorSizeBeverages(selected, itemPrice, size, itemSize);
 
             arrowKeySelection(selected, size, ch);
             if (ch == 13) {
-                cout << "You Selected " << itemSize << endl;
+//                cout << "You Selected " << itemSize << endl;
             }
         }
     }
 }
 
-void OrderFunctions::addToCart(string name, string size, double price, int quantity) {
+void OrderFunctions::addToCart(string name, string size, double price, int &quantity) {
     Order newOrder(name,size,price,quantity);
-
+    // baguhin ko lang onti to
     //adds the order to the vector
     orderList.push_back(newOrder);
-
+    price = getPrice(name, size);
     //display an affirmation that item has been added to cart
     cout<<"Item Successfully Added to Cart!<<endl";
     cout<<"Item Added: "<<name<<",Size: "<<size<<",Price: "<<price<<",Quanity: "<<quantity<<endl;
@@ -488,10 +489,85 @@ void OrderFunctions::addToCart(string name, string size, double price, int quant
 
 void OrderFunctions::deleteFromCart(int index) {
     // Code
+    string name = orderList[index].name;
+    string size = orderList[index].size;
+    double price = orderList[index].price;
+    int quantity = orderList[index].quantity;
+
+    // deletes item from order vector
+    orderList.erase(orderList.begin() + index);
+
+    //confirm deletion of order
+    cout<<"Item has been Deleted from Cart."<<endl;
+    cout<<"Item Deleted: "<<name<<", Size"<<size<<", Price: "<<price<<", Quantity: "<<quantity<<endl;
+}
+
+void OrderFunctions::displayCart() {
+    // Code
+    for (int i = 0; i < orderList.size(); i++) {
+        cout << "Item: " << orderList[i].name << ", Size: " << orderList[i].size << ", Price: " << orderList[i].price << ", Quantity: " << orderList[i].quantity << endl;
+    }
+}
+
+void OrderFunctions::addQuantity() {
+    cout << "\nEnter the quantity: ";
+    cin >> this->quantity;
+
+    if (quantity >= 1 && quantity <= 20) {
+        cout << "Quantity: " << quantity << endl;
+        return;
+    }
+
+    if (quantity < 1 || quantity > 20) {
+        cout << "Invalid quantity. Please enter a valid quantity." << endl;
+        addQuantity(); // Recursion????????????????????????????
+    }
+}
+
+void OrderFunctions::createOrder() {
+    static char choice;
+    if (choice == ' ')
+        order_or_TakeOut(this->order_or_takeout);
+
+    selectCategory(this->categoryItems, this->category);
+
+    while (this->category == "Back") {
+        order_or_TakeOut(this->order_or_takeout);
+        selectCategory(this->categoryItems, this->category);
+    }
+
+    displayMenu(this->category, this->itemOrder);
+
+    // A loop that will run until the user selects anything other than "Back"
+    while (this->itemOrder == "Back") {
+        selectCategory(this->categoryItems, this->category);
+        while (this->category == "Back") {
+            order_or_TakeOut(this->order_or_takeout);
+            selectCategory(this->categoryItems, this->category);
+        }
+        displayMenu(this->category, this->itemOrder);
+    }
+
+    displaySize(this->itemOrder, this->itemSize, this->category);
+    addQuantity();
+
+    cout << "\nAdd To Cart? (Y/N): "; cin >> choice;
+    if (choice == 'N' || choice == 'n')
+        createOrder(); // recursion
+
+    addToCart(this->itemOrder, this->itemSize, 0, this->quantity);
 
 }
 
-    void OrderFunctions::displayCart() {
-    // Code
-
+double OrderFunctions::getPrice(string item, string size) {
+    auto it = itemCategoryMap.find(item);
+    if (it != itemCategoryMap.end()) {
+        vector<double> itemPrice = getItemPrice(it->second, item);
+        if (size == "Medium") {
+            return itemPrice[0];
+        } else if (size == "Large") {
+            return itemPrice[1];
+        }
+    }
+    return 0;
 }
