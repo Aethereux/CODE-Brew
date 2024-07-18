@@ -490,3 +490,8 @@ void OrderFunctions::deleteFromCart(int index) {
     // Code
 
 }
+
+    void OrderFunctions::displayCart() {
+    // Code
+
+}
