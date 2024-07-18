@@ -19,8 +19,10 @@ struct Order {
     // Order Structure
     string name;
     string size;
+    double price;
+    int quanity;
 
-    Order(string n, string s) : name(n), size(s) {}
+    Order(string n, string s, double p, int q) : name(n), size(s), price (p), quanity(q){}
 };
 
 class MenuFunctions {
@@ -31,22 +33,42 @@ class MenuFunctions {
     void selector(int selected, string menuItems[], int size);
     void arrowKeySelection(int &selected, int size, int &ch);
     void order_or_TakeOut(string orderOrTakeOut);
-
 };
 
 class OrderFunctions : MenuFunctions {
     private:
     string *itemCategory;
     string order_or_takeout, category, itemOrder, itemSize;
+
+    //stores user input of orders
+    vector<Order>orders;
+
     public:
     OrderFunctions() {
-
     };
     void displayMenu(string itemCategory, string &finalItemChoice);
     void selector(int selected, vector<Menu> &menuItems, int size);
     void selectorSize(int selected, vector<double> &itemSize, int size, string &chosenSize);
     void displaySize(string &item, string &itemSize, string &itemCategory);
     vector<double> getItemPrice(vector<Menu> category, string &item);
+
+    //function to create an order
+    void addTocart (string name, string size, double price, int quanity) {
+        Order newOrder(name,size,price,quanity);
+
+        //adds the order to the vector
+        orders.push_back(newOrder);
+
+        //display an affirmation that item has been added to cart
+        cout<<"Item Successfully Added to Cart!<<endl";
+        cout<<"Item Added: "<<name<<",Size: "<<size<<",Price: "<<price<<",Quanity: "<<quanity<<endl;
+    }
+
+    //function to delete an order
+    void deleteFromcart (string name, string size,double price, int quantity) {
+
+    }
+
 };
 
 extern vector<Menu> Coffee;

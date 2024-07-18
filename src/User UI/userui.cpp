@@ -15,17 +15,6 @@ int main () {
     MenuFunctions menu;
     OrderFunctions order;
 
-    // Infinite loop to
-            menu.order_or_TakeOut(order_or_takeout);
-            menu.selectCategory(categoryItems, category);
-
-            order.displayMenu(category, itemOrder);
-            order.displaySize(itemOrder, itemSize, category);
-
-
-
-
-
         system("pause");
 
  }
