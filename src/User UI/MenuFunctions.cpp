@@ -325,8 +325,22 @@ void OrderFunctions::displayMenu(string itemCategory, string &finalItemChoice) {
 }
 
 void OrderFunctions::selector(int selected, vector<Menu> &menuItems, int size) {
+    bool isLargePriceZero;
     cout << "==== " << "Tite" << " ====" << endl;
-    cout << left << setw(43) << " " << setw(10) << "Medium" << setw(10) << "Large" << endl;
+    for (int i = 0; i < size; i++) {
+        if (menuItems[i].large == 0) {
+            isLargePriceZero = true;
+        } else {
+            isLargePriceZero = false;
+            break;
+        }
+    }
+    if (isLargePriceZero) {
+        cout << left << setw(43) << " " << setw(10) << " " << endl;
+    } else {
+        cout << left << setw(43) << " " << setw(10) << "Medium" << setw(10) << "Large" << endl;
+    }
+
     for (int i = 0; i < size; i++) {
         if (i == selected) {
             if (menuItems[i].name == "Back") {
@@ -343,11 +357,15 @@ void OrderFunctions::selector(int selected, vector<Menu> &menuItems, int size) {
             cout << left << setw(40) << menuItems[i].name << endl;
             continue;
         }
-        cout << left << setw(40) << menuItems[i].name
-             << setw(10) << fixed << setprecision(2) << menuItems[i].medium
-             << setw(10) << fixed << setprecision(2) << menuItems[i].large << endl;
-
-
+        if (menuItems[i].large == 0) {
+            cout << left << setw(40) << menuItems[i].name
+            << setw(10) << fixed << setprecision(2) << menuItems[i].medium << endl;
+            continue;
+        } else {
+            cout << left << setw(40) << menuItems[i].name
+            << setw(10) << fixed << setprecision(2) << menuItems[i].medium
+            << setw(10) << fixed << setprecision(2) << menuItems[i].large << endl;
+        }
     }
 }
 
@@ -371,7 +389,35 @@ vector<double> OrderFunctions::getItemPrice(vector<Menu> category, string &item)
     return itemSize;
 }
 
-void OrderFunctions::selectorSize(int selected, vector<double> &itemPrice, int size, string &chosenSize) {
+void OrderFunctions::selectorSizeFoods(int selected, vector<double> &itemPrice, int size, string &chosenSize) {
+    string tempSize; // Temporary variable to hold the current selection
+    for (int i = 0; i < size; i++) {
+        if (i == selected) {
+            cout << ">> ";
+        } else {
+            cout << "   ";
+        }
+        if (i < itemPrice.size() && itemPrice[i] == 0.00) {
+            cout << "Back" << endl;
+            if (i == selected) tempSize = "Back";
+            break;
+        } else {
+            switch (i) {
+                case 0:
+                    cout << itemPrice[i] << " PHP" << endl;
+                    if (i == selected) tempSize = "Medium";
+                    break;
+                default:
+                    cout << "Back" << endl;
+                    if (i == selected) tempSize = "Back";
+                    break;
+            }
+        }
+    }
+    chosenSize = tempSize;
+}
+
+void OrderFunctions::selectorSizeBeverages(int selected, vector<double> &itemPrice, int size, string &chosenSize) {
     string tempSize; // Temporary variable to hold the current selection
     for (int i = 0; i < size; i++) {
         if (i == selected) {
@@ -416,7 +462,11 @@ void OrderFunctions::displaySize(string &item, string &itemSize, string &itemCat
         }
         while (ch != 13) {
             system("cls");
-            selectorSize(selected, itemPrice, size, itemSize);
+            if(itemCategory == "Sandwiches" || itemCategory == "Pastas" || itemCategory == "Pastries")
+                selectorSizeFoods(selected, itemPrice, size, itemSize);
+                else
+                    selectorSizeBeverages(selected, itemPrice, size, itemSize);
+
             arrowKeySelection(selected, size, ch);
             if (ch == 13) {
                 cout << "You Selected " << itemSize << endl;

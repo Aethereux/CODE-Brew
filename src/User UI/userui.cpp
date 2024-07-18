@@ -23,9 +23,6 @@ int main () {
             order.displaySize(itemOrder, itemSize, category);
 
 
-
-
-
         system("pause");
 
  }
