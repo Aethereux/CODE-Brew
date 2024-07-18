@@ -4,25 +4,18 @@
 
 // This is the main file where we will run the program
 using namespace std;
-
-
 int main () {
-    int ch;
-    int selected = 0, quantity = 0;
-    string categoryItems[] = {"Coffee", "Frappes", "Refreshers", "Sandwiches", "Pastas", "Pastries", "Back"};
-    string order_or_takeout, category, itemOrder, itemSize;
-
     OrderFunctions *order;
-    char choice;
     // Infinite loop to
-            order = new OrderFunctions();
-            order->createOrder();
-
-
-
-    // test
-
-
+    // To do:
+    /*
+     * void displayCart();
+     * void deleteFromCart(int index);
+     *
+     * View Cart
+     * */
+    order = new OrderFunctions();
+    order->createOrder();
 
         system("pause");
 

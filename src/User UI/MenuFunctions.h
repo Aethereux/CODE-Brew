@@ -37,7 +37,7 @@ class MenuFunctions {
 
 class OrderFunctions : MenuFunctions {
     private:
-    string categoryItems[7] = {"Coffee", "Frappes", "Refreshers", "Sandwiches", "Pastas", "Pastries", "Back"};
+    string categoryItems[8] = {"Coffee", "Frappes", "Refreshers", "Sandwiches", "Pastas", "Pastries","View Cart", "Back"};
     string order_or_takeout, category, itemOrder, itemSize;
     int quantity;
     vector<Order> orderList;
