@@ -67,7 +67,7 @@ class OrderFunctions : MenuFunctions {
 
     //function to delete an order
     void deleteFromcart (string name, string size,double price, int quantity) {
-
+         //insert code here
     }
 
 };
