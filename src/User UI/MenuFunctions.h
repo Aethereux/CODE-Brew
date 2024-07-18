@@ -31,13 +31,17 @@ class MenuFunctions {
     void selector(int selected, string menuItems[], int size);
     void arrowKeySelection(int &selected, int size, int &ch);
     void order_or_TakeOut(string orderOrTakeOut);
-    
+
 };
 
 class OrderFunctions : MenuFunctions {
     private:
-    string itemCategory;
+    string *itemCategory;
+    string order_or_takeout, category, itemOrder, itemSize;
     public:
+    OrderFunctions() {
+
+    };
     void displayMenu(string itemCategory, string &finalItemChoice);
     void selector(int selected, vector<Menu> &menuItems, int size);
     void selectorSize(int selected, vector<double> &itemSize, int size, string &chosenSize);

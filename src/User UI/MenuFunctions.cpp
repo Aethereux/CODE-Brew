@@ -141,7 +141,7 @@ void MenuFunctions::order_or_TakeOut(string orderOrTakeOut) {
     int selected = 0, ch = 0;
     string display[size] = {"Order", "Take Out"};
     string finalChoice;
-    
+
     while (ch != 13){
         system("cls");
         cout << "Welcome to Code-Brew!" << endl;
@@ -206,7 +206,7 @@ void MenuFunctions::selectCategory(string *item, string &category) {
 }
 
 void OrderFunctions::displayMenu(string itemCategory, string &finalItemChoice) {
-    int selected = 0, ch = 0, i, k;
+    int selected = 0, ch = 0;
     int size;
 
     if (itemCategory == "Coffee"){
