@@ -48,7 +48,8 @@ class OrderFunctions : MenuFunctions {
     };
     void displayMenu(string itemCategory, string &finalItemChoice);
     void selector(int selected, vector<Menu> &menuItems, int size);
-    void selectorSize(int selected, vector<double> &itemSize, int size, string &chosenSize);
+    void selectorSizeBeverages(int selected, vector<double> &itemSize, int size, string &chosenSize);
+    void selectorSizeFoods(int selected, vector<double> &itemSize, int size, string &chosenSize);
     void displaySize(string &item, string &itemSize, string &itemCategory);
     vector<double> getItemPrice(vector<Menu> category, string &item);
 
