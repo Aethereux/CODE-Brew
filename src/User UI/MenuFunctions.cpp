@@ -475,3 +475,13 @@ void OrderFunctions::displaySize(string &item, string &itemSize, string &itemCat
     }
 }
 
+void OrderFunctions::addToCart(string name, string size, double price, int quantity) {
+    Order newOrder(name,size,price,quantity);
+
+    //adds the order to the vector
+    orders.push_back(newOrder);
+
+    //display an affirmation that item has been added to cart
+    cout<<"Item Successfully Added to Cart!<<endl";
+    cout<<"Item Added: "<<name<<",Size: "<<size<<",Price: "<<price<<",Quanity: "<<quantity<<endl;
+}
