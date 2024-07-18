@@ -485,3 +485,4 @@ void OrderFunctions::addToCart(string name, string size, double price, int quant
     cout<<"Item Successfully Added to Cart!<<endl";
     cout<<"Item Added: "<<name<<",Size: "<<size<<",Price: "<<price<<",Quanity: "<<quantity<<endl;
 }
+
