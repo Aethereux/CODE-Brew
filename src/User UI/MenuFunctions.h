@@ -46,6 +46,7 @@ class OrderFunctions : MenuFunctions {
     };
     //function to create an order
     void addToCart(string name, string size, double price, int quanity);
+    void deleteFromCart(int index);
     void displayMenu(string itemCategory, string &finalItemChoice);
     void selector(int selected, vector<Menu> &menuItems, int size);
     void selectorSizeBeverages(int selected, vector<double> &itemSize, int size, string &chosenSize);

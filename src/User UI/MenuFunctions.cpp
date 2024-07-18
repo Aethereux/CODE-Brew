@@ -486,3 +486,7 @@ void OrderFunctions::addToCart(string name, string size, double price, int quant
     cout<<"Item Added: "<<name<<",Size: "<<size<<",Price: "<<price<<",Quanity: "<<quantity<<endl;
 }
 
+void OrderFunctions::deleteFromCart(int index) {
+    // Code
+
+}
