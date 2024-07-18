@@ -19,8 +19,9 @@ struct Order {
     // Order Structure
     string name;
     string size;
-
-    Order(string n, string s) : name(n), size(s) {}
+    double price;
+    int quantity;
+    Order(string n, string s, double p, int q) : name(n), size(s), price (p), quantity(q){}
 };
 
 class MenuFunctions {
@@ -38,10 +39,13 @@ class OrderFunctions : MenuFunctions {
     private:
     string *itemCategory;
     string order_or_takeout, category, itemOrder, itemSize;
+    vector<Order> orderList;
     public:
     OrderFunctions() {
 
     };
+    //function to create an order
+    void addToCart(string name, string size, double price, int quanity);
     void displayMenu(string itemCategory, string &finalItemChoice);
     void selector(int selected, vector<Menu> &menuItems, int size);
     void selectorSizeBeverages(int selected, vector<double> &itemSize, int size, string &chosenSize);

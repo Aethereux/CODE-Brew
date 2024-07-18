@@ -479,7 +479,7 @@ void OrderFunctions::addToCart(string name, string size, double price, int quant
     Order newOrder(name,size,price,quantity);
 
     //adds the order to the vector
-    orders.push_back(newOrder);
+    orderList.push_back(newOrder);
 
     //display an affirmation that item has been added to cart
     cout<<"Item Successfully Added to Cart!<<endl";
