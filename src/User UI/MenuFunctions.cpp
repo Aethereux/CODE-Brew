@@ -247,6 +247,7 @@ void OrderFunctions::displayMenu(string itemCategory, string &finalItemChoice) {
             }
             cout << "You Selected: " << it->second[selected].name << endl;
             finalItemChoice = it->second[selected].name;
+            system("pause");
         }
     }
 }
@@ -401,7 +402,9 @@ void OrderFunctions::displaySize(string &item, string &itemSize, string &itemCat
 
             arrowKeySelection(selected, size, ch);
             if (ch == 13) {
-//                cout << "You Selected " << itemSize << endl;
+                if (itemSize == "Back") {
+                    return;
+                }
             }
         }
     }
@@ -410,13 +413,22 @@ void OrderFunctions::displaySize(string &item, string &itemSize, string &itemCat
 void OrderFunctions::addToCart(string name, string size, double price, int &quantity) {
     price = getPrice(name, size);
     Order newOrder(name,size,price,quantity);
-    // baguhin ko lang onti to
+
     //adds the order to the vector
     orderList.push_back(newOrder);
 
     //display an affirmation that item has been added to cart
     cout<<"Item Successfully Added to Cart!" << endl;
-    cout<<"Item Added: "<<name<<",Size: "<<size<<",Price: "<<price<<",Quantity: "<<quantity<<endl;
+    auto it = itemCategoryMap.find(name);
+    if (it != itemCategoryMap.end()) {
+        if (it->first == "Espresso" || it->first == "CODE BREW" || it->first  == "Coffee float" || it->first  == "Cof++" || it->first  == "Caramel Macchiato" || it->first  == "Matcha Latte"
+            || it->first  == "Mocha Frappe" || it->first  == "JavaChip" || it->first  == "C-Frappe" || it->first  == "Strawberry Frappe" || it->first  == "Caramel Frappe" || it->first  == "Cookies and Cream"
+            || it->first  == "JavaSip - Green Apple" || it->first  == "JavaSip - Strawberry" || it->first  == "JavaSip - Mango" || it->first  == "JavaSip - Lemonade" || it->first  == "Lemon Iced Tea") {
+            cout<<"Item Added: "<<name<<",Size: "<<size<<",Price: "<<price<<",Quantity: "<<quantity<<endl;
+        } else
+            cout<<"Item Added: "<<name<<",Price: "<<price<<",Quantity: "<<quantity<<endl;
+    }
+    system("pause");
 }
 
 void OrderFunctions::deleteFromCart(int index) {
@@ -443,7 +455,11 @@ void OrderFunctions::displayCart() {
     }
     for(int i = 0; i < orderList.size(); i++) {
         cout << "Item: " << orderList[i].name << endl;
-        cout << "Size: " << orderList[i].size << endl;
+        if (orderList[i].name == "Espresso" || orderList[i].name == "CODE BREW" || orderList[i].name == "Coffee float" || orderList[i].name == "Cof++" || orderList[i].name == "Caramel Macchiato" || orderList[i].name == "Matcha Latte"
+            || orderList[i].name == "Mocha Frappe" || orderList[i].name == "JavaChip" || orderList[i].name == "C-Frappe" || orderList[i].name == "Strawberry Frappe" || orderList[i].name == "Caramel Frappe" || orderList[i].name == "Cookies and Cream"
+            || orderList[i].name == "JavaSip - Green Apple" || orderList[i].name == "JavaSip - Strawberry" || orderList[i].name == "JavaSip - Mango" || orderList[i].name == "JavaSip - Lemonade" || orderList[i].name == "Lemon Iced Tea") {
+            cout << "Size: " << orderList[i].size << endl;
+        }
         cout << "Price: " << orderList[i].price << endl;
         cout << "Quantity: " << orderList[i].quantity << endl;
         cout << "-----------------------------------" << endl;
@@ -505,6 +521,32 @@ void OrderFunctions::createOrder() {
     }
 
     displaySize(this->itemOrder, this->itemSize, this->category);
+        while (this->itemSize == "Back") {
+            displayMenu(this->category, this->itemOrder);
+
+                // This is just a loop back don't pay too much attention to this and think how it works
+                while (this->itemOrder == "Back") {
+                    selectCategory(this->categoryItems, this->category);
+                    while (this->category == "Back") {
+                        order_or_TakeOut(this->order_or_takeout);
+                        selectCategory(this->categoryItems, this->category);
+                    }
+                    displayMenu(this->category, this->itemOrder);
+                    if(this->itemOrder == "View Cart") {
+                        displayCart();
+                        cout << endl << system("pause");
+                        createOrder(); // recursion
+                    }
+                }
+
+            if (this->itemOrder == "View Cart") {
+                displayCart();
+                cout << endl << system("pause");
+                createOrder(); // recursion
+            }
+
+            displaySize(this->itemOrder, this->itemSize, this->category);
+        }
     addQuantity();
 
     cout << "\nAdd To Cart? (Y/N): "; cin >> choice;
