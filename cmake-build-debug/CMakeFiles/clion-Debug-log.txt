@@ -11,6 +11,6 @@
 -- Check for working CXX compiler: D:/Program Files/CLion 2023.3.3/bin/mingw/bin/g++.exe - skipped
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
--- Configuring done (5.2s)
+-- Configuring done (4.1s)
 -- Generating done (0.0s)
 -- Build files have been written to: D:/Final Project OOP/CODE-Brew/cmake-build-debug

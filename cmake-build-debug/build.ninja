@@ -49,17 +49,24 @@ cmake_ninja_workdir = D$:/Final$ Project$ OOP/CODE-Brew/cmake-build-debug/
 
 build cmake_object_order_depends_target_CODE_Brew: phony || CMakeFiles/CODE_Brew.dir
 
+build CMakeFiles/CODE_Brew.dir/src/Database/OrderDataBase.cpp.obj: CXX_COMPILER__CODE_Brew_unscanned_Debug D$:/Final$ Project$ OOP/CODE-Brew/src/Database/OrderDataBase.cpp || cmake_object_order_depends_target_CODE_Brew
+  DEP_FILE = CMakeFiles\CODE_Brew.dir\src\Database\OrderDataBase.cpp.obj.d
+  FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
+  INCLUDES = -I"D:/Final Project OOP/CODE-Brew/src/Admin UI" -I"D:/Final Project OOP/CODE-Brew/src/User UI" -I"D:/Final Project OOP/CODE-Brew/src/Database"
+  OBJECT_DIR = CMakeFiles\CODE_Brew.dir
+  OBJECT_FILE_DIR = CMakeFiles\CODE_Brew.dir\src\Database
+
 build CMakeFiles/CODE_Brew.dir/src/User_UI/MenuFunctions.cpp.obj: CXX_COMPILER__CODE_Brew_unscanned_Debug D$:/Final$ Project$ OOP/CODE-Brew/src/User$ UI/MenuFunctions.cpp || cmake_object_order_depends_target_CODE_Brew
   DEP_FILE = CMakeFiles\CODE_Brew.dir\src\User_UI\MenuFunctions.cpp.obj.d
   FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
-  INCLUDES = -I"D:/Final Project OOP/CODE-Brew/src/Admin UI" -I"D:/Final Project OOP/CODE-Brew/src/Database" -I"D:/Final Project OOP/CODE-Brew/src/User UI"
+  INCLUDES = -I"D:/Final Project OOP/CODE-Brew/src/Admin UI" -I"D:/Final Project OOP/CODE-Brew/src/User UI" -I"D:/Final Project OOP/CODE-Brew/src/Database"
   OBJECT_DIR = CMakeFiles\CODE_Brew.dir
   OBJECT_FILE_DIR = CMakeFiles\CODE_Brew.dir\src\User_UI
 
 build CMakeFiles/CODE_Brew.dir/src/User_UI/userui.cpp.obj: CXX_COMPILER__CODE_Brew_unscanned_Debug D$:/Final$ Project$ OOP/CODE-Brew/src/User$ UI/userui.cpp || cmake_object_order_depends_target_CODE_Brew
   DEP_FILE = CMakeFiles\CODE_Brew.dir\src\User_UI\userui.cpp.obj.d
   FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
-  INCLUDES = -I"D:/Final Project OOP/CODE-Brew/src/Admin UI" -I"D:/Final Project OOP/CODE-Brew/src/Database" -I"D:/Final Project OOP/CODE-Brew/src/User UI"
+  INCLUDES = -I"D:/Final Project OOP/CODE-Brew/src/Admin UI" -I"D:/Final Project OOP/CODE-Brew/src/User UI" -I"D:/Final Project OOP/CODE-Brew/src/Database"
   OBJECT_DIR = CMakeFiles\CODE_Brew.dir
   OBJECT_FILE_DIR = CMakeFiles\CODE_Brew.dir\src\User_UI
 
@@ -71,7 +78,7 @@ build CMakeFiles/CODE_Brew.dir/src/User_UI/userui.cpp.obj: CXX_COMPILER__CODE_Br
 #############################################
 # Link the executable CODE_Brew.exe
 
-build CODE_Brew.exe: CXX_EXECUTABLE_LINKER__CODE_Brew_Debug CMakeFiles/CODE_Brew.dir/src/User_UI/MenuFunctions.cpp.obj CMakeFiles/CODE_Brew.dir/src/User_UI/userui.cpp.obj
+build CODE_Brew.exe: CXX_EXECUTABLE_LINKER__CODE_Brew_Debug CMakeFiles/CODE_Brew.dir/src/Database/OrderDataBase.cpp.obj CMakeFiles/CODE_Brew.dir/src/User_UI/MenuFunctions.cpp.obj CMakeFiles/CODE_Brew.dir/src/User_UI/userui.cpp.obj
   FLAGS = -g
   LINK_FLAGS = -static
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32

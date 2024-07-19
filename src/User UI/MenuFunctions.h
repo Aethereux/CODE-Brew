@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
 // Class Method Declarations for the feature of the project
 
 using namespace std;
@@ -17,6 +18,7 @@ struct Menu {
 
 struct Order {
     // Order Structure
+    int orderNumber;
     string name;
     string size;
     double price;
@@ -45,7 +47,7 @@ class OrderFunctions : MenuFunctions {
     OrderFunctions() {
 
     };
-    //function to create an order
+    vector<Order> getOrderList();
     void addToCart(string name, string size, double price, int &quantity);
     void deleteFromCart(int index);
     void displayCart();
@@ -66,6 +68,9 @@ extern vector<Menu> Refreshers;
 extern vector<Menu> Sandwiches;
 extern vector<Menu> Pastas;
 extern vector<Menu> Pastries;
+
+extern map<string, vector<Menu>> itemCategoryMap;
+extern map<string, vector<Menu>> categoryMap;
 
 
 
