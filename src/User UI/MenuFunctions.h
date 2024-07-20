@@ -41,14 +41,12 @@ class MenuFunctions {
 class OrderFunctions : MenuFunctions {
     private:
     string categoryItems[8] = {"Coffee", "Frappes", "Refreshers", "Sandwiches", "Pastas", "Pastries","View Cart", "Back"};
-    string order_or_takeout = "", category, itemOrder, itemSize;
+    string order_or_takeout, category, itemOrder, itemSize;
     int quantity;
     vector<Order> orderList;
     public:
-    OrderFunctions() {
 
-    };
-
+    void displayTotal();
     vector<Order> getOrderList();
     void addToCart(string name, string size, double price, int &quantity);
     void deleteFromCart(int index);

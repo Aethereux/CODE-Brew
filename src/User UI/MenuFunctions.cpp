@@ -357,7 +357,9 @@ void OrderFunctions::selectorSizeFoods(int selected, vector<double> &itemPrice, 
                     break;
             }
         }
+        cout << "----------------------|" << endl;
     }
+    cout << "----------------------|" << endl;
     chosenSize = tempSize;
 }
 
@@ -399,14 +401,14 @@ void OrderFunctions::displaySize(string &item, string &itemSize, string &itemCat
     auto it = itemCategoryMap.find(item);
     if (it != itemCategoryMap.end()) {
         vector<double> itemPrice = getItemPrice(it->second, item);
-        if (itemCategory == "Sandwiches" || itemCategory == "Pastas" || itemCategory == "Pastries") {
+        if (itemCategory == "SANDWICHES" || itemCategory == "PASTAS" || itemCategory == "PASTRIES") {
             size = 2;
         } else {
             size = 3;
         }
         while (ch != 13) {
             system("cls");
-            if(itemCategory == "Sandwiches" || itemCategory == "Pastas" || itemCategory == "Pastries")
+            if(itemCategory == "SANDWICHES" || itemCategory == "PASTAS" || itemCategory == "PASTRIES")
                 selectorSizeFoods(selected, itemPrice, size, itemSize);
             else
                 selectorSizeBeverages(selected, itemPrice, size, itemSize);
