@@ -12,9 +12,6 @@
 
 using namespace std;
 
-
-
-
 vector<Menu> Coffee = {
         {"CODE BREW", 70.00, 80.00,},
         {"Espresso ", 100.00, 110.00,},
@@ -161,12 +158,15 @@ void MenuFunctions::arrowKeySelection(int &selected, int size, int &ch) {
 void MenuFunctions::order_or_TakeOut(string orderOrTakeOut) {
     const int size = 2;
     int selected = 0, ch = 0;
-    string display[size] = {"Order", "Take Out"};
+    string display[size] = {"Dine-In", "Take-Out"};
     string finalChoice;
 
     while (ch != 13){
         system("cls");
-        cout << "Welcome to Code-Brew!" << endl;
+        cout<<"+=============================================+"<<endl;
+        cout<<"|                  CODE BREW                  |"<<endl;
+        cout<<"+=============================================+"<<endl;
+        cout<<"|Welcome to Code Brew! Select Ordering Option:|"<<endl;
         selector(selected, display, size);
         arrowKeySelection(selected, size, ch);
     }
@@ -174,10 +174,10 @@ void MenuFunctions::order_or_TakeOut(string orderOrTakeOut) {
     if (ch == 13) {
         switch (selected) {
             case 0:
-                finalChoice = "Order";
+                finalChoice = "Dine-In";
                 break;
             case 1:
-                finalChoice = "Take Out";
+                finalChoice = "Take-Out";
                 break;
         }
     }
@@ -191,7 +191,7 @@ void MenuFunctions::selectCategory(string *item, string &category) {
     int selected = 0, ch = 0;
     while (ch != 13) {
         system("cls");
-        cout << "Select category: " << endl;
+        cout << "======== What Would You Like To Have Today? ========" << endl;
         selector(selected, item, itemSize);
         arrowKeySelection(selected, itemSize, ch);
     }
@@ -438,9 +438,19 @@ void OrderFunctions::addToCart(string name, string size, double price, int &quan
         if (it->first == "Espresso" || it->first == "CODE BREW" || it->first  == "Coffee float" || it->first  == "Cof++" || it->first  == "Caramel Macchiato" || it->first  == "Matcha Latte"
             || it->first  == "Mocha Frappe" || it->first  == "JavaChip" || it->first  == "C-Frappe" || it->first  == "Strawberry Frappe" || it->first  == "Caramel Frappe" || it->first  == "Cookies and Cream"
             || it->first  == "JavaSip - Green Apple" || it->first  == "JavaSip - Strawberry" || it->first  == "JavaSip - Mango" || it->first  == "JavaSip - Lemonade" || it->first  == "Lemon Iced Tea") {
-            cout<<"Item Added: "<<name<<",Size: "<<size<<",Price: "<<price<<",Quantity: "<<quantity<<endl;
-        } else
-            cout<<"Item Added: "<<name<<",Price: "<<price<<",Quantity: "<<quantity<<endl;
+            cout << "---------------------------------|" << endl;
+            cout << "Item Name: " << name << endl;
+            cout << "Size: " << size << endl;
+            cout << "Price: " << price << endl;
+            cout << "Quantity: " << quantity << endl;
+            cout << "---------------------------------|" << endl;
+        } else {
+            cout << "---------------------------------" << endl;
+            cout << "Item Added: " << name << endl;
+            cout << "Price: " << price << endl;
+            cout << "Quantity: " << quantity << endl;
+            cout << "---------------------------------|" << endl;
+        }
     }
     system("pause");
 }
