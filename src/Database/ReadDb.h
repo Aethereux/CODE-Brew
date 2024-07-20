@@ -13,7 +13,7 @@ using namespace std;
 class ReadDb : Database {
 private:
     vector<string> rawData; // This is the raw data from the txt file
-    // vector<Order> orderData; // This is the data that will be used in the program
+    // vector<Order> dataFromProgram; // This is the data that will be used in the program
 public:
     void readDb();
     void displayAllOrderFromDb();

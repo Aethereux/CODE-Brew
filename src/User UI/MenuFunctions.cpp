@@ -7,9 +7,12 @@
 #include <conio.h>
 #include <string>
 #include <map>
+#include <windows.h>
 // this file is where we will define the methods of the MenuFunctions class
 
 using namespace std;
+
+
 
 
 vector<Menu> Coffee = {
@@ -127,6 +130,7 @@ map<string, vector<Menu>> categoryMap = {
         {"PASTAS", Pastas},
         {"PASTRIES", Pastries}
 };
+
 
 
 void MenuFunctions::selector(int selected, string menuItems[], int size) {
@@ -426,6 +430,7 @@ void OrderFunctions::addToCart(string name, string size, double price, int &quan
 
     //display an affirmation that item has been added to cart
     cout<<"Item Successfully Added to Cart!" << endl;
+
     auto it = itemCategoryMap.find(name);
     if (it != itemCategoryMap.end()) {
         if (it->first == "Espresso" || it->first == "CODE BREW" || it->first  == "Coffee float" || it->first  == "Cof++" || it->first  == "Caramel Macchiato" || it->first  == "Matcha Latte"
@@ -460,7 +465,6 @@ void OrderFunctions::displayCart() {
         cout << "Cart is Empty" << endl;
         return;
     }
-    for (int i = 0; i < orderList.size(); i++) {
         for (int i = 0; i < orderList.size(); i++) {
             cout << "Item: " << orderList[i].name << endl;
             if (orderList[i].name == "Espresso" || orderList[i].name == "CODE BREW" ||
@@ -470,15 +474,15 @@ void OrderFunctions::displayCart() {
                 orderList[i].name == "C-Frappe" || orderList[i].name == "Strawberry Frappe" ||
                 orderList[i].name == "Caramel Frappe" || orderList[i].name == "Cookies and Cream"
                 || orderList[i].name == "JavaSip - Green Apple" || orderList[i].name == "JavaSip - Strawberry" ||
-                orderList[i].name == "JavaSip - Mango" || orderList[i].name == "JavaSip - Lemonade" ||
-                orderList[i].name == "Lemon Iced Tea") {
+                orderList[i].name == "JavaSip - Mango" || orderList[i].name == "JavaSip - Lemonade" || orderList[i].name == "Lemon Iced Tea") {
+
                 cout << "Size: " << orderList[i].size << endl;
             }
+
             cout << "Price: " << orderList[i].price << endl;
             cout << "Quantity: " << orderList[i].quantity << endl;
             cout << "-----------------------------------" << endl;
         }
-    }
 }
     void OrderFunctions::addQuantity() {
         cout << "\nEnter the quantity: ";

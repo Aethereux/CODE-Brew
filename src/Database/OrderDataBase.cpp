@@ -32,7 +32,7 @@ void ReadDb::readDb() {
         price = stod(orderPrice);
         quantity = stoi(orderQuantity);
 
-        dataFromProgram.push_back(Order(orderName, orderSize, price, quantity));
+        dataFromProgram.emplace_back(orderName, orderSize, price, quantity);
     }
     file.close();
 }
@@ -80,6 +80,7 @@ void WriteDb::addDataToDb() {
 
     for (Order &i : this->dataFromProgram) {
         if (i.size == "Large" && i.price == 0.00) {
+            // Probably a file << "Order Number: " << i.orderNumber << endl;
             file << "Name: " << i.name  << " | Price: " << i.price << " | Quantity: " << i.quantity << endl;
             return;
         }

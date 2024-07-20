@@ -19,7 +19,7 @@ public:
     void addRawProfitsToDb(vector<Order> &order);
     void addDataToDb(); // Pretty Data
     void deleteOrderFromDb(int index);
-    void setDataFromProgram(vector<Order> &order);
+    void setDataFromProgram(vector<Order> &order); // Pretty Data
 };
 
 #endif //CODE_BREW_WRITEDB_H

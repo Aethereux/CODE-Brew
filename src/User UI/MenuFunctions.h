@@ -8,6 +8,7 @@
 
 using namespace std;
 
+
 struct Menu {
     // Menu Structure
     string name;
@@ -40,13 +41,14 @@ class MenuFunctions {
 class OrderFunctions : MenuFunctions {
     private:
     string categoryItems[8] = {"Coffee", "Frappes", "Refreshers", "Sandwiches", "Pastas", "Pastries","View Cart", "Back"};
-    string order_or_takeout, category, itemOrder, itemSize;
+    string order_or_takeout = "", category, itemOrder, itemSize;
     int quantity;
     vector<Order> orderList;
     public:
     OrderFunctions() {
 
     };
+
     vector<Order> getOrderList();
     void addToCart(string name, string size, double price, int &quantity);
     void deleteFromCart(int index);
@@ -60,6 +62,8 @@ class OrderFunctions : MenuFunctions {
     void selectorSizeFoods(int selected, vector<double> &itemSize, int size, string &chosenSize);
     void displaySize(string &item, string &itemSize, string &itemCategory);
     double getPrice(string item, string itemSize);
+
+    void saveOrderToDb();
 };
 
 extern vector<Menu> Coffee;
