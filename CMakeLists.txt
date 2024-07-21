@@ -3,6 +3,7 @@ project(CODE_Brew)
 
 set(CMAKE_CXX_STANDARD 14)
 
+
 include_directories("src/Admin UI")
 include_directories("src/User UI")
 include_directories("src/Database")

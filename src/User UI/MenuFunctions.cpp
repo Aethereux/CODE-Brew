@@ -8,6 +8,7 @@
 #include <string>
 #include <map>
 #include <windows.h>
+
 // this file is where we will define the methods of the MenuFunctions class
 
 using namespace std;
@@ -128,10 +129,19 @@ map<string, vector<Menu>> categoryMap = {
         {"PASTRIES", Pastries}
 };
 
-
+void OrderFunctions::selectorCheckout(int &selected, string options[], int size) {
+    for (int i = 0; i < size; i++) {
+        if (i == selected) {
+            cout << ">> ";
+        } else {
+            cout << "   ";
+        }
+        cout << options[i] << endl;
+    }
+}
 
 void MenuFunctions::selector(int selected, string menuItems[], int size) {
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size; i++) { // dito rin un e
         if (i == selected) {
             cout << ">> ";
         } else {
@@ -155,12 +165,10 @@ void MenuFunctions::arrowKeySelection(int &selected, int size, int &ch) {
     }
 }
 
-void MenuFunctions::order_or_TakeOut(string orderOrTakeOut) {
+void MenuFunctions::order_or_TakeOut(string &orderOrTakeOut) {
     const int size = 2;
     int selected = 0, ch = 0;
     string display[size] = {"Dine-In", "Take-Out"};
-    string finalChoice;
-
     while (ch != 13){
         system("cls");
         cout<<"+=============================================+"<<endl;
@@ -174,14 +182,13 @@ void MenuFunctions::order_or_TakeOut(string orderOrTakeOut) {
     if (ch == 13) {
         switch (selected) {
             case 0:
-                finalChoice = "Dine-In";
+                orderOrTakeOut = display[0];
                 break;
             case 1:
-                finalChoice = "Take-Out";
+                orderOrTakeOut = display[1];
                 break;
         }
     }
-    orderOrTakeOut = finalChoice;
 }
 
 void MenuFunctions::selectCategory(string *item, string &category) {
@@ -229,7 +236,7 @@ void MenuFunctions::selectCategory(string *item, string &category) {
     category = finalCategoryChoice;
 }
 
-void OrderFunctions::displayMenu(string itemCategory, string &finalItemChoice) {
+void OrderFunctions::displayMenu(string &itemCategory, string &finalItemChoice) {
     int selected = 0, ch = 0;
     int size;
     auto it = categoryMap.find(itemCategory);
@@ -253,14 +260,12 @@ void OrderFunctions::displayMenu(string itemCategory, string &finalItemChoice) {
                 finalItemChoice = "Back";
                 return;
             }
-            cout << "You Selected: " << it->second[selected].name << endl;
             finalItemChoice = it->second[selected].name;
-            system("pause");
         }
     }
 }
 
-void OrderFunctions::selector(int selected, vector<Menu> &menuItems, int size) {
+void OrderFunctions::selector(int &selected, vector<Menu> &menuItems, int size) {
     bool isLargePriceZero;
     for (int i = 0; i < size; i++) {
         if (menuItems[i].large == 0) {
@@ -315,51 +320,34 @@ void OrderFunctions::selector(int selected, vector<Menu> &menuItems, int size) {
 
 
 
-vector<double> OrderFunctions::getItemPrice(vector<Menu> category, string &item) {
+vector<double> OrderFunctions::getItemPrice(vector<Menu> &category, string &item) {
     vector<double> itemSize;
-    for (Menu &i : category) { // For Items that has two sizes
-        if (item == "Espresso" || item == "CODE BREW" || item == "Coffee float" || item == "Cof++" || item == "Caramel Macchiato" || item == "Matcha Latte"
-            || item == "Mocha Frappe" || item == "JavaChip" || item == "C-Frappe" || item == "Strawberry Frappe" || item == "Caramel Frappe" || item == "Cookies and Cream"
-            || item == "JavaSip - Green Apple" || item == "JavaSip - Strawberry" || item == "JavaSip - Mango" || item == "JavaSip - Lemonade" || item == "Lemon Iced Tea") {
+    for (Menu &i : category) {
+        if (item == i.name) {
             itemSize.push_back(i.medium);
-            itemSize.push_back(i.large);
-            itemSize.push_back(0);
-        } else { // For items that only have one size
-            itemSize.push_back(i.medium);
-            itemSize.push_back(0);
+            if (i.large != 0) { // If there is a large size price, add it to the vector
+                itemSize.push_back(i.large);
+            }
+            break; // Exit the loop once the item is found
         }
-
     }
     return itemSize;
 }
 
-void OrderFunctions::selectorSizeFoods(int selected, vector<double> &itemPrice, int size, string &chosenSize) {
+void OrderFunctions::selectorSizeFoods(int selected, int size, string &chosenSize) {
     string tempSize; // Temporary variable to hold the current selection
     for (int i = 0; i < size; i++) {
-        if (i == selected) {
-            cout << ">> ";
-        } else {
-            cout << "   ";
-        }
-        if (i < itemPrice.size() && itemPrice[i] == 0.00) {
-            cout << "Back" << endl;
-            if (i == selected) tempSize = "Back";
-            break;
-        } else {
             switch (i) {
                 case 0:
-                    cout << itemPrice[i] << " PHP" << endl;
                     if (i == selected) tempSize = "Medium";
                     break;
                 default:
-                    cout << "Back" << endl;
                     if (i == selected) tempSize = "Back";
                     break;
             }
         }
         cout << "----------------------|" << endl;
     }
-    cout << "----------------------|" << endl;
     chosenSize = tempSize;
 }
 
@@ -397,7 +385,7 @@ void OrderFunctions::selectorSizeBeverages(int selected, vector<double> &itemPri
 }
 
 void OrderFunctions::displaySize(string &item, string &itemSize, string &itemCategory) {
-    int selected = 0, ch = 0, size = 0;
+    int selected = 0, ch = 0, size;
     auto it = itemCategoryMap.find(item);
     if (it != itemCategoryMap.end()) {
         vector<double> itemPrice = getItemPrice(it->second, item);
@@ -408,9 +396,10 @@ void OrderFunctions::displaySize(string &item, string &itemSize, string &itemCat
         }
         while (ch != 13) {
             system("cls");
-            if(itemCategory == "SANDWICHES" || itemCategory == "PASTAS" || itemCategory == "PASTRIES")
-                selectorSizeFoods(selected, itemPrice, size, itemSize);
-            else
+            if(itemCategory == "SANDWICHES" || itemCategory == "PASTAS" || itemCategory == "PASTRIES") {
+                selectorSizeFoods(selected, size, itemSize);
+                return; // Don't need to display and select size for foods
+            } else
                 selectorSizeBeverages(selected, itemPrice, size, itemSize);
 
             arrowKeySelection(selected, size, ch);
@@ -418,6 +407,7 @@ void OrderFunctions::displaySize(string &item, string &itemSize, string &itemCat
                 if (itemSize == "Back") {
                     return;
                 }
+
             }
         }
     }
@@ -473,28 +463,66 @@ void OrderFunctions::deleteFromCart(int index) {
 void OrderFunctions::displayCart() {
     // Code
     system("cls");
+    int selected = 0, ch = 0;
+    double Total_Price = 0.0, Total = 0.0;
+    string selectedOption[] = {"Check-out" , "Back"};
     if (orderList.begin() == orderList.end()) {
         cout << "Cart is Empty" << endl;
+        system("pause");
         return;
     }
-        for (int i = 0; i < orderList.size(); i++) {
-            cout << "Item: " << orderList[i].name << endl;
-            if (orderList[i].name == "Espresso" || orderList[i].name == "CODE BREW" ||
-                orderList[i].name == "Coffee float" || orderList[i].name == "Cof++" ||
-                orderList[i].name == "Caramel Macchiato" || orderList[i].name == "Matcha Latte"
-                || orderList[i].name == "Mocha Frappe" || orderList[i].name == "JavaChip" ||
-                orderList[i].name == "C-Frappe" || orderList[i].name == "Strawberry Frappe" ||
-                orderList[i].name == "Caramel Frappe" || orderList[i].name == "Cookies and Cream"
-                || orderList[i].name == "JavaSip - Green Apple" || orderList[i].name == "JavaSip - Strawberry" ||
-                orderList[i].name == "JavaSip - Mango" || orderList[i].name == "JavaSip - Lemonade" || orderList[i].name == "Lemon Iced Tea") {
+    while (ch != 13) {
 
-                cout << "Size: " << orderList[i].size << endl;
+        Total = 0.0;
+
+        cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
+        cout << "| ITEM NAME\t\t\t\t   SIZE\t\t       PRICE\t\t    QUANTITY\t\t   TOTAL       |" << endl;
+        cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
+        for (auto &i : orderList) {
+            cout << "| ";
+            if (i.name == "Espresso" || i.name == "CODE BREW" ||
+                i.name == "Coffee float" || i.name == "Cof++" ||
+                i.name == "Caramel Macchiato" || i.name == "Matcha Latte"
+                || i.name == "Mocha Frappe" || i.name == "JavaChip" ||
+                i.name == "C-Frappe" || i.name == "Strawberry Frappe" ||
+                i.name == "Caramel Frappe" || i.name == "Cookies and Cream"
+                || i.name == "JavaSip - Green Apple" || i.name == "JavaSip - Strawberry" ||
+                i.name == "JavaSip - Mango" || i.name == "JavaSip - Lemonade" || i.name == "Lemon Iced Tea") {
+                cout << left << setw(41) << i.name;
+                cout << setw(20)  << i.size;
             }
-
-            cout << "Price: " << orderList[i].price << endl;
-            cout << "Quantity: " << orderList[i].quantity << endl;
-            cout << "-----------------------------------" << endl;
+            else  {
+                cout << left  << setw(61)  << i.name;
+            }
+            cout << setw(21) << i.price;
+            cout << setw(23) << i.quantity;
+            Total_Price = i.price * i.quantity;
+            cout << setprecision(2) << setw(12) << Total_Price;
+            cout << "|" << endl;
+            cout << "|                                                                                                                      |\n";
+            Total += Total_Price;
         }
+        cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
+        cout << "|                                                                                            Total Amount: " << fixed << setprecision(2) << setw(12) << Total << "|" << endl;
+        cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
+
+        selectorCheckout(selected, selectedOption, 2);
+        arrowKeySelection(selected, 2, ch);
+        system("cls");
+    }
+
+    if(ch == 13) {
+        switch (selected) {
+            case 0:
+                system("cls");
+                displayTotal(orderList);
+                checkOut();
+                system("pause");
+                break;
+            case 1:
+                return;
+        }
+    }
 }
     void OrderFunctions::addQuantity() {
         cout << "\nEnter the quantity: ";
@@ -507,7 +535,7 @@ void OrderFunctions::displayCart() {
 
     if (quantity < 1 || quantity > 20) {
         cout << "Invalid quantity. Please enter a valid quantity." << endl;
-        addQuantity(); // Recursion????????????????????????????
+        addQuantity(); // Recursion
     }
 }
 

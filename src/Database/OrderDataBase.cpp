@@ -19,23 +19,28 @@ void ReadDb::readDb() {
         return;
     }
 
-    string orderName, orderSize, orderPrice, orderQuantity;
+    string orderNumber, orderName, orderSize, orderPrice, orderQuantity;
     double price;
-    int quantity;
+    int quantity, orderNum;
+
     for (string &i : rawData) {
         stringstream ss(i);
+        getline(ss, orderNumber, ',' );
         getline(ss, orderName, ',');
         getline(ss, orderSize, ',');
         getline(ss, orderPrice, ',');
         getline(ss, orderQuantity, ',');
 
+        orderNum = stoi(orderNumber);
         price = stod(orderPrice);
         quantity = stoi(orderQuantity);
 
         dataFromProgram.emplace_back(orderName, orderSize, price, quantity);
+        dataFromProgram.back().orderNumber = orderNum;
     }
     file.close();
 }
+
 
 void ReadDb::displayAllOrderFromDb() {
     ifstream file(absolutePath);
@@ -53,40 +58,45 @@ void WriteDb::addOrderToDb(vector<Order> &order) {
     }
 
     for (Order &i : order) {
-        file << i.name << "," << i.size << "," << i.price << "," << i.quantity << endl;
+        file << i.orderNumber << ","<< i.name << "," << i.size << "," << i.price << "," << i.quantity << endl;
     }
     file.close();
 
 }
 
-void WriteDb::addRawProfitsToDb(vector<Order> &order) {
-    ofstream file(absolutePath, ios::app);
-    double rawProfits = 0;
-    for (Order &i : order) {
-        rawProfits += (i.price * i.quantity);
-    }
-
-    file << "\nTotal Profits: " << rawProfits << endl;
-    file.close();
-}
 
 void WriteDb::addDataToDb() {
     ReadDb readFile;
     ofstream file(absolutePath, ios::app); // save to Orders.txt
-
+    double rawProfits = 0;
     if (!file.is_open()) {
         cout << "Error opening file" << endl;
+        return; // Ensure to exit the function if file opening fails
     }
-
+    int orderNumber = dataFromProgram.back().orderNumber;
     for (Order &i : this->dataFromProgram) {
-        if (i.size == "Large" && i.price == 0.00) {
-            // Probably a file << "Order Number: " << i.orderNumber << endl;
-            file << "Name: " << i.name  << " | Price: " << i.price << " | Quantity: " << i.quantity << endl;
-            return;
+        if (i.orderNumber == orderNumber) {
+            if (i.name == "Espresso" || i.name == "CODE BREW" ||
+                i.name == "Coffee float" || i.name == "Cof++" ||
+                i.name == "Caramel Macchiato" || i.name == "Matcha Latte"
+                || i.name == "Mocha Frappe" || i.name == "JavaChip" ||
+                i.name == "C-Frappe" || i.name == "Strawberry Frappe" ||
+                i.name == "Caramel Frappe" || i.name == "Cookies and Cream"
+                || i.name == "JavaSip - Green Apple" || i.name == "JavaSip - Strawberry" || i.name == "JavaSip - Mango" || i.name == "JavaSip - Lemonade" || i.name == "Lemon Iced Tea") {
+                file << "Name: " << i.name << " | Size: " << i.size << " | Price: " << i.price << " | Quantity: " << i.quantity << endl;
+                rawProfits += (i.price * i.quantity);
+            } else {
+                file << "Name: " << i.name << " | Price: " << i.price << " | Quantity: " << i.quantity << endl;
+                rawProfits += (i.price * i.quantity);
+            }
         }
-        file << "Name: " << i.name << " | Size: " << i.size << " | Price: " << i.price << " | Quantity: " << i.quantity << endl;
+
     }
+    file << "Order Number: " << orderNumber << endl;
+    file << "\nTotal: " << rawProfits << endl;
+    file << "--------------------------------------" << endl;
     file.close();
+    this->dataFromProgram.clear(); // Clears the current data for the next order;
 }
 
 vector<Order> ReadDb::getOrderData() {

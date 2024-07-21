@@ -16,7 +16,6 @@ private:
     // vector<Order> dataFromProgram; // This is the data that will be used in the program
 public:
     void addOrderToDb(vector<Order> &order); // Raw Data
-    void addRawProfitsToDb(vector<Order> &order);
     void addDataToDb(); // Pretty Data
     void deleteOrderFromDb(int index);
     void setDataFromProgram(vector<Order> &order); // Pretty Data
