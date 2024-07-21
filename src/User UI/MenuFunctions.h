@@ -19,6 +19,7 @@ struct Menu {
 
 struct Order {
     // Order Structure
+    string diningOption;
     int orderNumber;
     string name;
     string size;

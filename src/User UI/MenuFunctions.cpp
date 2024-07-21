@@ -430,7 +430,7 @@ void OrderFunctions::displaySize(string &item, string &itemSize, string &itemCat
 void OrderFunctions::addToCart(string name, string size, double price, int &quantity) {
     price = getPrice(name, size);
     Order newOrder(name,size,price,quantity);
-
+    newOrder.diningOption = this->order_or_takeout;
     //adds the order to the vector
     orderList.push_back(newOrder);
 
@@ -462,7 +462,7 @@ void OrderFunctions::displayCart() {
     string selectedOption[] = {"Check-out" , "Back"};
     if (orderList.begin() == orderList.end()) {
         cout << "Cart is Empty" << endl;
-        system("pause");
+        Sleep(2000);
         return;
     }
     while (ch != 13) {
@@ -511,7 +511,6 @@ void OrderFunctions::displayCart() {
                 system("cls");
                 displayTotal(orderList);
                 checkOut();
-                system("pause");
                 break;
             case 1:
                 return;
@@ -542,7 +541,6 @@ void OrderFunctions::createOrder() {
     while (running) {
         if (this->order_or_takeout != "Dine-In" && this->order_or_takeout != "Take-Out") {
             order_or_TakeOut(this->order_or_takeout);
-            cout << this->order_or_takeout << endl;
             system("pause");
         }
 
@@ -689,5 +687,5 @@ void OrderFunctions::checkOut() {
     //save order to database
     saveOrderToDb();
     orderList.clear();
-    system("pause");
+    Sleep(1000);
 }

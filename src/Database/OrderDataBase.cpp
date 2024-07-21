@@ -19,12 +19,13 @@ void ReadDb::readDb() {
         return;
     }
 
-    string orderNumber, orderName, orderSize, orderPrice, orderQuantity;
+    string diningOption, orderNumber, orderName, orderSize, orderPrice, orderQuantity;
     double price;
     int quantity, orderNum;
 
     for (string &i : rawData) {
         stringstream ss(i);
+        getline(ss, diningOption, ',');
         getline(ss, orderNumber, ',' );
         getline(ss, orderName, ',');
         getline(ss, orderSize, ',');
@@ -37,6 +38,7 @@ void ReadDb::readDb() {
 
         dataFromProgram.emplace_back(orderName, orderSize, price, quantity);
         dataFromProgram.back().orderNumber = orderNum;
+        dataFromProgram.back().diningOption = diningOption;
     }
     file.close();
 }
@@ -58,7 +60,7 @@ void WriteDb::addOrderToDb(vector<Order> &order) {
     }
 
     for (Order &i : order) {
-        file << i.orderNumber << ","<< i.name << "," << i.size << "," << i.price << "," << i.quantity << endl;
+        file << i.diningOption << "," << i.orderNumber << ","<< i.name << "," << i.size << "," << i.price << "," << i.quantity << endl;
     }
     file.close();
 
@@ -74,6 +76,9 @@ void WriteDb::addDataToDb() {
         return; // Ensure to exit the function if file opening fails
     }
     int orderNumber = dataFromProgram.back().orderNumber;
+    string diningOption = dataFromProgram.back().diningOption;
+    file << "--------------------------------------" << endl;
+    file << "Dining Option: " << diningOption << endl << endl;
     for (Order &i : this->dataFromProgram) {
         if (i.orderNumber == orderNumber) {
             if (i.name == "Espresso" || i.name == "CODE BREW" ||
