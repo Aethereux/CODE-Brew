@@ -4,6 +4,8 @@
 
 *.vscode
 
+*cmake-build-debug
+
 
 
 
