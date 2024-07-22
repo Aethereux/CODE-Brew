@@ -43,15 +43,6 @@ void ReadDb::readDb() {
     file.close();
 }
 
-
-void ReadDb::displayAllOrderFromDb() {
-    ifstream file(absolutePath);
-    string line;
-    while (getline(file, line)) {
-        cout << line << endl;
-    }
-}
-
 void WriteDb::addOrderToDb(vector<Order> &order) {
     ofstream file(absoluteRawFilePath, ios::app); // save to RawOrders.txt
 

@@ -6,7 +6,6 @@ using namespace std;
 
 int main () {
     OrderFunctions *order;
-    char choice;
     while(true) {
         order = new OrderFunctions();
         order->createOrder();

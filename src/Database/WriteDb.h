@@ -17,7 +17,6 @@ private:
 public:
     void addOrderToDb(vector<Order> &order); // Raw Data
     void addDataToDb(); // Pretty Data
-    void deleteOrderFromDb(int index);
     void setDataFromProgram(vector<Order> &order); // Pretty Data
 };
 

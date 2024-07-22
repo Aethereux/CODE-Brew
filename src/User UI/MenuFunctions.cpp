@@ -1,6 +1,5 @@
 #include <iostream>
 #include "MenuFunctions.h"
-#include "Database.h"
 #include "ReadDb.h"
 #include "WriteDb.h"
 #include <iomanip>
@@ -140,6 +139,52 @@ void OrderFunctions::selectorCheckout(int &selected, string options[], int size)
     }
 }
 
+void OrderFunctions::selectorDeleteCart(int &selected, vector<Order> &temp, int size) {
+    double Total_Price;
+    for (int i = 0; i < size; i++) {
+        if (temp[i].name == "Cancel") {
+            continue; // Skip the Cancel entry in the main loop
+        }
+
+        if (i == selected) {
+            cout << "|>> ";
+        } else {
+            cout << "|   ";
+        }
+        if (temp[i].name == "Espresso" || temp[i].name == "CODE BREW" ||
+            temp[i].name == "Coffee float" || temp[i].name == "Cof++" ||
+            temp[i].name == "Caramel Macchiato" || temp[i].name == "Matcha Latte" ||
+            temp[i].name == "Mocha Frappe" || temp[i].name == "JavaChip" ||
+            temp[i].name == "C-Frappe" || temp[i].name == "Strawberry Frappe" ||
+            temp[i].name == "Caramel Frappe" || temp[i].name == "Cookies and Cream" ||
+            temp[i].name == "JavaSip - Green Apple" || temp[i].name == "JavaSip - Strawberry" ||
+            temp[i].name == "JavaSip - Mango" || temp[i].name == "JavaSip - Lemonade" ||
+            temp[i].name == "Lemon Iced Tea") {
+            cout << left << setw(40) << temp[i].name << setw(20) << temp[i].size << setw(23) << temp[i].price << setw(22)
+                 << temp[i].quantity;
+        } else {
+            cout << left << setw(60) << temp[i].name << setw(23) << temp[i].price << setw(22) << temp[i].quantity;
+        }
+        Total_Price = temp[i].price * temp[i].quantity;
+        cout << setprecision(2) << setw(10) << Total_Price << "|" << endl;
+    }
+    cout << "|                                                                                                                      |\n";
+    cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
+
+    //Cancel button
+    for (int i = 0; i < size; i++) {
+        if (temp[i].name == "Cancel") {
+            if (i == selected) {
+                cout << " >> ";
+            } else {
+                cout << "   ";
+            }
+            cout << "Cancel" << endl;
+        }
+    }
+}
+
+
 void MenuFunctions::selector(int selected, string menuItems[], int size) {
     for (int i = 0; i < size; i++) { // dito rin un e
         if (i == selected) {
@@ -163,6 +208,15 @@ void MenuFunctions::selector(int selected, string menuItems[], int size) {
     }
 }
 
+void OrderFunctions::selectorQuantity(int &selected) {
+    cout << "-----------------------------------\n";
+    cout << "|   Quantity:  |\t " << selected <<"\t  |\n";
+    cout << "-----------------------------------\n";
+    cout << " + Arrow Up to Increase Quantity\n";
+    cout << " - Arrow Down to Decrease Quantity\n";
+
+}
+
 void MenuFunctions::arrowKeySelection(int &selected, int size, int &ch) {
     ch = getch();
     if (ch == 224) {  // Arrow keys start with 224
@@ -172,6 +226,22 @@ void MenuFunctions::arrowKeySelection(int &selected, int size, int &ch) {
                 break;
             case 80:  // Down arrow
                 selected = (selected + 1) % size;
+                break;
+        }
+    }
+}
+void OrderFunctions::arrowKeySelectionQuantity(int &selected, int size, int &ch) {
+    ch = getch();
+    if (ch == 224) {  // Arrow keys start with 224
+        switch (getch()) {
+            case 72:  // Up arrow
+                selected = (selected + 1 + size) % size;
+                break;
+            case 80:  // Down arrow
+            if (selected == 0) {
+                selected = 1;
+            }
+                selected = (selected - 1) % size;
                 break;
         }
     }
@@ -248,6 +318,7 @@ void MenuFunctions::selectCategory(string *item, string &category) {
 
     category = finalCategoryChoice;
 }
+
 
 void OrderFunctions::displayMenu(string &itemCategory, string &finalItemChoice) {
     int selected = 0, ch = 0;
@@ -439,19 +510,28 @@ void OrderFunctions::addToCart(string name, string size, double price, int &quan
     Sleep(3000);
 }
 
-void OrderFunctions::deleteFromCart(int index) {
+void OrderFunctions::deleteFromCart() {
     // Code
-    string name = orderList[index].name;
-    string size = orderList[index].size;
-    double price = orderList[index].price;
-    int quantity = orderList[index].quantity;
+    int selected = 0, ch = 0, size;
+    vector<Order> temp = orderList;
+    temp.push_back({"Cancel", "", 0.00, 0});
+    size = temp.size();
+    while (ch != 13) {
+        system("cls");
+        cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
+        cout << "|   ITEM NAME\t\t\t\t    SIZE\t        PRICE\t\t    QUANTITY\t\t     TOTAL     |" << endl;
+        cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
+        selectorDeleteCart(selected, temp ,size);
+        arrowKeySelection(selected, size, ch);
+    }
+    if (ch == 13) {
+        if (temp[selected].name == "Cancel") {
+            return;
+        }
+        orderList.erase(orderList.begin() + selected);
+    }
 
-    // deletes item from order vector
-    orderList.erase(orderList.begin() + index);
-
-    //confirm deletion of order
     cout<<"Item has been Deleted from Cart."<<endl;
-    cout<<"Item Deleted: "<<name<<", Size"<<size<<", Price: "<<price<<", Quantity: "<<quantity<<endl;
 }
 
 void OrderFunctions::displayCart() {
@@ -459,7 +539,7 @@ void OrderFunctions::displayCart() {
     system("cls");
     int selected = 0, ch = 0;
     double Total_Price = 0.0, Total = 0.0;
-    string selectedOption[] = {"Check-out" , "Back"};
+    string selectedOption[3] = {"Remove Items From Cart", "Check-out" , "Back"};
     if (orderList.begin() == orderList.end()) {
         cout << "Cart is Empty" << endl;
         Sleep(2000);
@@ -470,10 +550,10 @@ void OrderFunctions::displayCart() {
         Total = 0.0;
 
         cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
-        cout << "| ITEM NAME\t\t\t\t   SIZE\t\t       PRICE\t\t    QUANTITY\t\t   TOTAL       |" << endl;
+        cout << "|   ITEM NAME\t\t\t\t    SIZE\t        PRICE\t\t    QUANTITY\t\t     TOTAL     |" << endl;
         cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
         for (auto &i : orderList) {
-            cout << "| ";
+            cout << "|   ";
             if (i.name == "Espresso" || i.name == "CODE BREW" ||
                 i.name == "Coffee float" || i.name == "Cof++" ||
                 i.name == "Caramel Macchiato" || i.name == "Matcha Latte"
@@ -482,26 +562,26 @@ void OrderFunctions::displayCart() {
                 i.name == "Caramel Frappe" || i.name == "Cookies and Cream"
                 || i.name == "JavaSip - Green Apple" || i.name == "JavaSip - Strawberry" ||
                 i.name == "JavaSip - Mango" || i.name == "JavaSip - Lemonade" || i.name == "Lemon Iced Tea") {
-                cout << left << setw(41) << i.name;
+                cout << left << setw(40) << i.name;
                 cout << setw(20)  << i.size;
             }
             else  {
-                cout << left  << setw(61)  << i.name;
+                cout << left  << setw(60)  << i.name;
             }
-            cout << setw(21) << i.price;
-            cout << setw(23) << i.quantity;
+            cout << setw(23) << i.price;
+            cout << setw(22) << i.quantity;
             Total_Price = i.price * i.quantity;
-            cout << setprecision(2) << setw(12) << Total_Price;
+            cout << setprecision(2) << setw(10) << Total_Price;
             cout << "|" << endl;
             cout << "|                                                                                                                      |\n";
             Total += Total_Price;
         }
         cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
-        cout << "|                                                                                            Total Amount: " << fixed << setprecision(2) << setw(12) << Total << "|" << endl;
+        cout << "|                                                                                              Total Amount: " << fixed << setprecision(2) << setw(10) << Total << "|" << endl;
         cout << "------------------------------------------------------------------------------------------------------------------------" << endl;
 
-        selectorCheckout(selected, selectedOption, 2);
-        arrowKeySelection(selected, 2, ch);
+        selectorCheckout(selected, selectedOption, 3);
+        arrowKeySelection(selected, 3, ch);
         system("cls");
     }
 
@@ -509,30 +589,36 @@ void OrderFunctions::displayCart() {
         switch (selected) {
             case 0:
                 system("cls");
+                deleteFromCart();
+                break;
+            case 1:
+                system("cls");
                 displayTotal(orderList);
                 checkOut();
                 break;
-            case 1:
+            case 2:
                 return;
         }
     }
 }
 
 void OrderFunctions::addQuantity() {
-    cout << "-----------------------------------\n";
-    cout << "Enter Quantity: ";
-    cin >> this->quantity;
-
-    if (quantity >= 1 && quantity <= 20) {
-
-        cout << "Quantity: " << quantity << endl;
-        cout << "-----------------------------------";
-        return;
+    int selected = 1, ch;
+    while (ch != 13) {
+        system("cls");
+        selectorQuantity(selected);
+        arrowKeySelectionQuantity(selected, 20, ch);
+        this->quantity = selected;
     }
-
-    if (quantity < 1 || quantity > 20) {
-        cout << "Invalid quantity. Please enter a valid quantity." << endl;
-        addQuantity(); // Recursion
+    if (ch == 13) {
+        if (this->quantity == 0) {
+            cout << "Invalid Quantity! Try Again!" << endl;
+            system("pause");
+            addQuantity();
+            return;
+        }
+        this->quantity = selected;
+        return;
     }
 }
 
@@ -568,27 +654,41 @@ void OrderFunctions::createOrder() {
         if (this->itemSize == "Back") continue; // Go back to item selection
 
         addQuantity();
-        if (this->quantity < 1 || this->quantity > 20) {
-            cout << "Invalid quantity. Please enter a valid quantity." << endl;
-            continue; // Go back to quantity selection
-        }
 
         char addMore = ' ', choice;
-        cout << "\nAdd Item to Cart? (Y/N): ";
-        cin >> addMore;
+        while(true) {
+            cout<<"-----------------------------------"<<endl;
+            cout << "Add Item to Cart? (Y/N): ";
+            cin >> addMore;
 
+            if(tolower(addMore) == 'n' || tolower(addMore) == 'y') {
+                break; // Go back to the start of the loop
+            }
+            else {
+                cout << "Invalid Input! Try Again!\n";
+            }
+        }
         if (tolower(addMore) == 'n') continue; // Go back to the start of the loop
-
         addToCart(this->itemOrder, this->itemSize, 0, this->quantity);
-        cout << "Checkout? (Y/N): ";
-        cin >> choice;
+
+        while (true) {
+            cout << "\nCheckout? (Y/N): ";
+            cin >> choice;
+            if (tolower(choice) == 'y' || tolower(choice) == 'n') {
+                break;
+            } else {
+                cout << "Invalid Input! Try Again!\n" << endl;
+            }
+        }
         if (tolower(choice) == 'y') {
             running = false;
-            displayTotal(orderList);
+            displayTotal();
             checkOut();
+            break;
         }
     }
 }
+
 
 double OrderFunctions::getPrice(string item, string size) {
     auto it = itemCategoryMap.find(item);
@@ -603,11 +703,6 @@ double OrderFunctions::getPrice(string item, string size) {
     return 0;
 }
 
-vector<Order> OrderFunctions::getOrderList() {
-    return this->orderList;
-}
-
-
 void OrderFunctions::saveOrderToDb() {
     ReadDb readFile;
     WriteDb writeFile;
@@ -620,44 +715,28 @@ void OrderFunctions::saveOrderToDb() {
     writeFile.addDataToDb(); // writes the pretty data to the Orders.txt
 }
 
-void OrderFunctions::displayTotal(vector<Order> &orders) {
+void OrderFunctions::displayTotal() {
+    // may parameter, tinanggal ko yan kanina dkase nagamit okei
     double total = 0.0;
     static int orderNumber = 0;
     system("cls");
-    cout << "------------------------------------------------"<< endl;
-    cout << "\t \t  ORDER NUMBER  " << endl;
-    cout << " \t\t       " << ++orderNumber << endl;
-    cout << "------------------------------------------------" << endl;
-    cout << "\t     WELCOME TO CODE BREW! " << endl;
-    cout << "\t\t1207 Makati City" << endl << endl;
+    cout << "-----------------------------------------------------------"<< endl;
+    cout << "\t \t    ORDER NUMBER  " << endl;
+    cout << " \t\t         " << ++orderNumber << endl;
+    cout << "-----------------------------------------------------------"<< endl;
+    cout << "\t        WELCOME TO CODE BREW! " << endl;
+    cout << "\t\t  1207 Makati City" << endl << endl;
     cout << "Ordering Options:  " << this->order_or_takeout << endl << endl;
 
-    // Find the maximum lengths
-    int maxNameLength = 0;
-    int maxSizeLength = 0;
 
-    for (const Order &o : orderList) {
-        int nameLength = o.name.length();
-        if (nameLength > maxNameLength) {
-            maxNameLength = nameLength;
-        }
-
-        int sizeLength = o.size.length();
-        if (sizeLength > maxSizeLength) {
-            maxSizeLength = sizeLength;
-        }
-    }
-
-    // Calculate total length for item description (name + size + 3 for " (" and ")")
-    int maxItemLength = maxNameLength + maxSizeLength + 3;
-
-    cout << "QTY\tITEM" << right<<setw(maxItemLength) << "TOTAL" << endl;
-    cout << "------------------------------------------------" << endl;
+    cout << "QTY\tITEM" << right<<setw(45) << "    TOTAL" << endl;
+    cout << "-----------------------------------------------------------" << endl;
 
     for (Order &o : orderList) {
+        //unique order number
         o.orderNumber = orderNumber;
+        //calculates the total of each item.
         double itemTotal = o.quantity * o.price;
-        total += itemTotal;
 
         // Check if the item is a special item
         if (o.name == "Espresso" || o.name == "CODE BREW" ||
@@ -668,24 +747,28 @@ void OrderFunctions::displayTotal(vector<Order> &orders) {
             o.name == "Caramel Frappe" || o.name == "Cookies and Cream" ||
             o.name == "JavaSip - Green Apple" || o.name == "JavaSip - Strawberry" ||
             o.name == "JavaSip - Mango" || o.name == "JavaSip - Lemonade" || o.name == "Lemon Iced Tea") {
-            cout << " " << o.quantity << "\t" << left << setw(maxItemLength) << (o.name + " (" + o.size + ")")
-                 << right << setw(5) << fixed << setprecision(2) << itemTotal << endl;
+            cout << " " << o.quantity << "\t" << left << setw(45) << (o.name + " (" + o.size + ")")
+                 << fixed << setprecision(2) << itemTotal << endl;
         } else {
-            cout << " " << o.quantity << "\t" << left << setw(maxItemLength) << o.name
-                 << right << setw(5) << fixed << setprecision(2) << itemTotal << endl;
+            cout << " " << o.quantity << "\t" << left << setw(45) << o.name
+                 << fixed << setprecision(2) << itemTotal << endl;
         }
+        total += itemTotal;
     }
-
+    cout<<"\n==========================================================="<<endl;
+    cout<<left<<setw(53)<<"TOTAL:  " << fixed << setprecision(2) << total << endl;
 }
 
 
 void OrderFunctions::checkOut() {
-    cout << "\n------------------------------------------------" << endl;
+    cout << "\n-----------------------------------------------------------" << endl;
     cout << "PLEASE PRESENT THIS SLIP AT THE COUNTER" << endl;
     cout << "Thank You for Choosing Code Brew!" << endl;
-    cout<<"See You Again."<<endl;
+    cout << "See You Again." << endl;
     //save order to database
     saveOrderToDb();
     orderList.clear();
     Sleep(1000);
+    system("pause");
 }
+

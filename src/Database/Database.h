@@ -14,8 +14,6 @@ protected:
     string absoluteRawFilePath = string(userProfile) + "\\Documents\\rawOrders.txt";
     string absolutePath = string(userProfile) + "\\Documents\\orders.txt";
     vector<Order> dataFromProgram;
-public:
-    void extractData();
 };
 
 #endif //CODE_BREW_DATABASE_H

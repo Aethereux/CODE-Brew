@@ -16,9 +16,6 @@ private:
     // vector<Order> dataFromProgram; // This is the data that will be used in the program
 public:
     void readDb();
-    bool isOrderProcessed(const vector<string> &rawOrderLine);
-    void readExistingData();
-    void displayAllOrderFromDb();
     vector<Order> getOrderData();
 };
 

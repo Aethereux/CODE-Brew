@@ -47,11 +47,10 @@ class OrderFunctions : MenuFunctions {
     vector<Order> orderList;
     public:
 
-    void displayTotal(vector<Order> &orders);
+    void displayTotal();
     void checkOut();
-    vector<Order> getOrderList();
     void addToCart(string name, string size, double price, int &quantity);
-    void deleteFromCart(int index);
+    void deleteFromCart();
     void displayCart();
     void createOrder();
     void addQuantity();
@@ -59,11 +58,13 @@ class OrderFunctions : MenuFunctions {
     void displayMenu(string &itemCategory, string &finalItemChoice);
     void selector(int &selected, vector<Menu> &menuItems, int size);
     void selectorCheckout(int &selected, string options[], int size);
+    void selectorDeleteCart(int &selected, vector<Order> &temp, int size);
     void selectorSizeBeverages(int &selected, vector<double> &itemSize, int size, string &chosenSize);
+    void selectorQuantity(int &selected);
     void selectorSizeFoods(int selected, int size, string &chosenSize);
+    void arrowKeySelectionQuantity(int &selected, int size, int &ch);
     void displaySize(string &item, string &itemSize, string &itemCategory);
     double getPrice(string item, string itemSize);
-
     void saveOrderToDb();
 };
 
