@@ -258,7 +258,7 @@ void MenuFunctions::order_or_TakeOut(string &orderOrTakeOut) {
         cout<<"+==============================================+"<<endl;
         cout<<"| Welcome to Code Brew! Select Ordering Option |"<<endl;
         selector(selected, display, size);
-        cout<<"-----------------------------------------------" << endl;
+        cout<<"------------------------------------------------" << endl;
         arrowKeySelection(selected, size, ch);
     }
 
@@ -593,7 +593,7 @@ void OrderFunctions::displayCart() {
                 break;
             case 1:
                 system("cls");
-                displayTotal(orderList);
+                displayTotal();
                 checkOut();
                 break;
             case 2:
