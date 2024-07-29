@@ -28,8 +28,8 @@ struct Order {
     Order(string n, string s, double p, int q) : name(n), size(s), price (p), quantity(q){}
 };
 
+
 class MenuFunctions {
-    private:
     public:
     // Public Variables
     void selectCategory(string *item, string &category);
@@ -44,9 +44,8 @@ class OrderFunctions : MenuFunctions {
     string categoryItems[8] = {"Coffee", "Frappes", "Refreshers", "Sandwiches", "Pastas", "Pastries","View Cart", "Back"};
     string order_or_takeout, category, itemOrder, itemSize;
     int quantity;
-    vector<Order> orderList;
+    vector<Order> orderList; // Main array
     public:
-
     void displayTotal();
     void checkOut();
     void addToCart(string name, string size, double price, int &quantity);
@@ -67,17 +66,5 @@ class OrderFunctions : MenuFunctions {
     double getPrice(string item, string itemSize);
     void saveOrderToDb();
 };
-
-extern vector<Menu> Coffee;
-extern vector<Menu> Frappes;
-extern vector<Menu> Refreshers;
-extern vector<Menu> Sandwiches;
-extern vector<Menu> Pastas;
-extern vector<Menu> Pastries;
-
-extern map<string, vector<Menu>> itemCategoryMap;
-extern map<string, vector<Menu>> categoryMap;
-
-
 
 #endif

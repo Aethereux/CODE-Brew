@@ -13,7 +13,7 @@ protected:
     char *userProfile = getenv("USERPROFILE");
     string absoluteRawFilePath = string(userProfile) + "\\Documents\\rawOrders.txt";
     string absolutePath = string(userProfile) + "\\Documents\\orders.txt";
-    vector<Order> dataFromProgram;
+    vector<Order> dataFromProgram; // Processed data
 };
 
 #endif //CODE_BREW_DATABASE_H

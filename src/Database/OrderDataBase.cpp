@@ -50,7 +50,7 @@ void WriteDb::addOrderToDb(vector<Order> &order) {
         cout << "Error opening file" << endl;
     }
 
-    for (Order &i : order) {
+    for (Order &i : order) { // Ranged For loop
         file << i.diningOption << "," << i.orderNumber << ","<< i.name << "," << i.size << "," << i.price << "," << i.quantity << endl;
     }
     file.close();
@@ -86,7 +86,6 @@ void WriteDb::addDataToDb() {
                 rawProfits += (i.price * i.quantity);
             }
         }
-
     }
     file << "Order Number: " << orderNumber << endl;
     file << "\nTotal: " << rawProfits << endl;

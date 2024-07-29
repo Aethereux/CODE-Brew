@@ -20,4 +20,5 @@ public:
     void setDataFromProgram(vector<Order> &order); // Pretty Data
 };
 
+//
 #endif //CODE_BREW_WRITEDB_H

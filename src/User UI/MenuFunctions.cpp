@@ -4,7 +4,6 @@
 #include "WriteDb.h"
 #include <iomanip>
 #include <conio.h>
-#include <string>
 #include <map>
 #include <windows.h>
 
@@ -251,7 +250,7 @@ void MenuFunctions::order_or_TakeOut(string &orderOrTakeOut) {
     const int size = 2;
     int selected = 0, ch = 0;
     string display[size] = {"Dine-In", "Take-Out"};
-    while (ch != 13){
+    while (ch != 13) { // Enter Key ASCII
         system("cls");
         cout<<"+==============================================+"<<endl;
         cout<<"|                  CODE BREW                   |"<<endl;
@@ -277,7 +276,6 @@ void MenuFunctions::order_or_TakeOut(string &orderOrTakeOut) {
 void MenuFunctions::selectCategory(string *item, string &category) {
     string finalCategoryChoice;
     int itemSize = 8;
-
     int selected = 0, ch = 0;
     while (ch != 13) {
         system("cls");
@@ -315,7 +313,6 @@ void MenuFunctions::selectCategory(string *item, string &category) {
 
         }
     }
-
     category = finalCategoryChoice;
 }
 
@@ -624,6 +621,7 @@ void OrderFunctions::addQuantity() {
 
 void OrderFunctions::createOrder() {
     bool running = true;
+
     while (running) {
         if (this->order_or_takeout != "Dine-In" && this->order_or_takeout != "Take-Out") {
             order_or_TakeOut(this->order_or_takeout);
@@ -703,7 +701,7 @@ double OrderFunctions::getPrice(string item, string size) {
     return 0;
 }
 
-void OrderFunctions::saveOrderToDb() {
+void OrderFunctions::saveOrderToDb() { // Save the order to the base
     ReadDb readFile;
     WriteDb writeFile;
 
